@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  relationMode      = "prisma"
+}
+
+model User {
+  id              String            @id
+  createdAt       DateTime          @default(now())
+  username        String            @unique
+  password        String
+  permissions     UserPermission[]
+  characterSheets CharacterSheets[]
+}
+
+model Permission {
+  id              String           @id
+  createdAt       DateTime         @default(now())
+  permissionName  String
+  permissionLevel Int
+  users           UserPermission[]
+}
+
+model UserPermission {
+  id           String     @id
+  userId       String
+  permissionId String
+  user         User       @relation(fields: [userId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id])
+
+  @@index([userId])
+  @@index([permissionId])
+}
+
+model CharacterSheets {
+  id           String                @id
+  createdAt    DateTime              @default(now())
+  userId       String
+  user         User                  @relation(fields: [userId], references: [id])
+  chName       String
+  chAttributes CharacterAttributes[]
+
+  @@index([userId])
+}
+
+model CharacterAttributes {
+  id         String          @id
+  chSheetId  String
+  attrNameId String
+  chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id])
+  attrName   AttributesName  @relation(fields: [attrNameId], references: [id])
+
+  @@index([chSheetId])
+  @@index([attrNameId])
+}
+
+model AttributesName {
+  id           String                @id
+  chAttributes CharacterAttributes[]
+  name         String
+  values       AttributesValues[]
+}
+
+model AttributesValues {
+  id        String         @id
+  attNameId String
+  attName   AttributesName @relation(fields: [attNameId], references: [id])
+  value     String
+
+  @@index([attNameId])
+}
