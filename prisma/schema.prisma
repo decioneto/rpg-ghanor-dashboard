@@ -17,27 +17,27 @@ model User {
   createdAt       DateTime          @default(now())
   username        String            @unique
   password        String
-  permissions     UserPermission[]
+  roles           UserRole[]
   characterSheets CharacterSheets[]
 }
 
-model Permission {
-  id              String           @id
-  createdAt       DateTime         @default(now())
-  permissionName  String
-  permissionLevel Int
-  users           UserPermission[]
+model Role {
+  id        String     @id
+  createdAt DateTime   @default(now())
+  roleName  String
+  roleLevel Int
+  users     UserRole[]
 }
 
-model UserPermission {
-  id           String     @id
-  userId       String
-  permissionId String
-  user         User       @relation(fields: [userId], references: [id])
-  permission   Permission @relation(fields: [permissionId], references: [id])
+model UserRole {
+  id     String @id
+  userId String
+  roleId String
+  user   User   @relation(fields: [userId], references: [id])
+  role   Role   @relation(fields: [roleId], references: [id])
 
   @@index([userId])
-  @@index([permissionId])
+  @@index([roleId])
 }
 
 model CharacterSheets {

@@ -1,0 +1,15 @@
+export enum AttributeNameEnum {
+    PV_LIST = 'pvList',
+    PM_LIST = 'pmList',
+    CH_CLASS = 'class',
+    CH_RACE = 'race',
+    CH_ORIGIN = 'origins',
+    CH_ATTRIBUTES = 'attributes',
+    CH_ABILITIES = 'abilities',
+    CH_ATTACKS = 'attacks',
+    CH_EQUIPMENTS = 'equipments',
+    CH_POWERS = 'powers',
+    CH_MAGICS = 'magics',
+    CH_ITEMS = 'items',
+    CH_BACKPACK = 'backpack',
+}
