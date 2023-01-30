@@ -7,8 +7,8 @@ export interface UserProps {
     createdAt?: Date;
     username: string;
     password: string;
-    roles: Role;
-    chacacterSheets: CharacterSheets[];
+    role: Role;
+    characterSheets: CharacterSheets[] | null;
 }
 
 export class User {
@@ -47,10 +47,10 @@ export class User {
     }
 
     public get roles() {
-        return this.props.roles;
+        return this.props.role;
     }
 
     public get characterSheets() {
-        return this.props.chacacterSheets;
+        return this.props.characterSheets;
     }
 }

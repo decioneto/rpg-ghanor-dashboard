@@ -2,7 +2,7 @@ import { AttributeNameEnum } from '@/enums/AttributesNameEnum';
 import { CharacterSheets } from './characterSheets';
 
 describe('CharacterSheet', () => {
-    it('should be able to create a character sheer', () => {
+    it('should be able to create a character sheet', () => {
         const characterSheet = new CharacterSheets({
             userId: 'qweqwe',
             chName: 'Olaf',
