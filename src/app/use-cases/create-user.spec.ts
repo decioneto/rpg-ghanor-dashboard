@@ -1,22 +1,17 @@
-import { RoleLevelEnum, RoleNameEnum } from '@/enums/RoleEnum';
-import { Role } from '../entities/role';
-import { User } from '../entities/user';
+import { InMemoryUserRepository } from '@/test/repositories/in-memory-user-repository';
 import { CreateUser } from './create-user';
 
 describe('Create User', () => {
-    it('should be able to create a user', () => {
-        const createUser = new CreateUser();
+    it('should be able to create a user', async () => {
+        const userRepository = new InMemoryUserRepository();
+        const createUser = new CreateUser(userRepository);
 
-        expect(
-            createUser.execute({
-                username: 'decioneeto',
-                password: '12312',
-                role: new Role({
-                    roleName: RoleNameEnum.PLAYER,
-                    roleLevel: RoleLevelEnum.PLAYER,
-                }),
-                characterSheets: null,
-            })
-        ).resolves.toBeInstanceOf(User);
+        const { user } = await createUser.execute({
+            username: 'decioneeto',
+            password: '12312',
+        });
+
+        expect(userRepository.users).toHaveLength(1);
+        expect(userRepository.users[0]).toEqual(user);
     });
 });

@@ -1,25 +1,33 @@
-import { CharacterSheets } from '../entities/characterSheets';
-import { Role } from '../entities/role';
+import { hash } from 'bcryptjs';
 import { User } from '../entities/user';
+import { UserRepository } from '../repositories/user-repository';
 
 interface CreateUserRequest {
     username: string;
     password: string;
-    role: Role;
-    characterSheets: CharacterSheets[] | null;
+}
+
+interface CreateUserResponse {
+    user: User;
 }
 
 export class CreateUser {
-    async execute(request: CreateUserRequest): Promise<User> {
-        const { username, password, role, characterSheets } = request;
+    constructor(private userRepository: UserRepository) {}
+
+    async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
+        const { username, password } = request;
+
+        const passwordHash = await hash(password, 8);
 
         const user = new User({
             username,
-            password,
-            role,
-            characterSheets,
+            password: passwordHash,
         });
 
-        return user;
+        await this.userRepository.create(user);
+
+        return {
+            user,
+        };
     }
 }
