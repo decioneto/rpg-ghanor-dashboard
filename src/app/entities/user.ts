@@ -1,6 +1,4 @@
 import { randomUUID } from 'crypto';
-import { CharacterSheets } from './characterSheets';
-import { Role } from './role';
 
 export interface UserProps {
     id?: string;
@@ -40,7 +38,7 @@ export class User {
         this.props.password = password;
     }
 
-    public get passwors() {
+    public get password() {
         return this.props.password;
     }
 }

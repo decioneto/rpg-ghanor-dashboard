@@ -14,7 +14,7 @@ export default async function CreateNotificationController(
 ) {
     const prismaService = new PrismaService();
     const userRepository = new PrismaUserRepository(prismaService);
-    const createUser: CreateUser = new CreateUser(userRepository);
+    const createUser = new CreateUser(userRepository);
 
     const { username, password } = req.body;
 
@@ -24,15 +24,19 @@ export default async function CreateNotificationController(
             password,
         });
 
-        return {
-            data: user,
-            status: res
-                .status(201)
-                .json({ message: 'User created successfully' }),
-        };
+        return res.status(201).json({
+            data: {
+                user: {
+                    id: user.id,
+                    username: user.username,
+                },
+            },
+            status: 'success',
+        });
     } catch (error) {
         return res.status(400).json({
-            message: 'Can not create user',
+            message: 'Can not create a user',
+            status: 'failed',
         });
     }
 }
