@@ -16,6 +16,11 @@ export class CreateUser {
 
     async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
         const { username, password } = request;
+        const userExist = await this.userRepository.findByUsername(username);
+
+        if (userExist) {
+            throw new Error('User already exists');
+        }
 
         const passwordHash = await hash(password, 8);
 
