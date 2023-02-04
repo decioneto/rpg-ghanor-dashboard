@@ -33,9 +33,9 @@ export default async function CreateNotificationController(
             },
             status: 'success',
         });
-    } catch (error) {
+    } catch (err: Error | any) {
         return res.status(400).json({
-            message: 'Can not create a user',
+            message: err.message,
             status: 'failed',
         });
     }

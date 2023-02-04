@@ -14,6 +14,7 @@ module.exports = {
         '!<rootDir>/src/infra/database/**',
         '!<rootDir>/src/app/repositories/**',
         '!<rootDir>/src/test/repositories/**',
+        '!<rootDir>/src/pages/**',
     ],
     moduleNameMapper: {
         // Handle CSS imports (with CSS modules)
