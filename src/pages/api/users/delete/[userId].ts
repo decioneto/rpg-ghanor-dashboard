@@ -1,4 +1,3 @@
-import { CreateUser } from '@/app/use-cases/create-user';
 import { DeleteUser } from '@/app/use-cases/delete-user';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';
@@ -10,10 +9,17 @@ interface DeleteUserRequest extends NextApiRequest {
     };
 }
 
-export default async function CreateNotificationController(
+export default async function deleteUserController(
     req: DeleteUserRequest,
     res: NextApiResponse
 ) {
+    if (req.method !== 'DELETE') {
+        return res.status(405).json({
+            message: 'Method not allowed',
+            status: 'failed',
+        });
+    }
+
     const prismaService = new PrismaService();
     const userRepository = new PrismaUserRepository(prismaService);
     const deleteUser = new DeleteUser(userRepository);

@@ -8,10 +8,17 @@ interface CreatUserRequest extends NextApiRequest {
     body: CreateUserDTO;
 }
 
-export default async function CreateNotificationController(
+export default async function createUserController(
     req: CreatUserRequest,
     res: NextApiResponse
 ) {
+    if (req.method !== 'POST') {
+        return res.status(405).json({
+            message: 'Method not allowed',
+            status: 'failed',
+        });
+    }
+
     const prismaService = new PrismaService();
     const userRepository = new PrismaUserRepository(prismaService);
     const createUser = new CreateUser(userRepository);
