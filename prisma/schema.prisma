@@ -52,21 +52,30 @@ model CharacterSheets {
 }
 
 model CharacterAttributes {
-  id         String          @id
-  chSheetId  String
-  attrNameId String
-  chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id])
-  attrName   AttributesName  @relation(fields: [attrNameId], references: [id])
+  id          String                    @id
+  chSheetId   String
+  chSheets    CharacterSheets           @relation(fields: [chSheetId], references: [id])
+  chAttrNames CharacterAttributesName[]
 
   @@index([chSheetId])
+}
+
+model CharacterAttributesName {
+  id         String              @id
+  chAttrId   String
+  attrNameId String
+  chAttr     CharacterAttributes @relation(fields: [chAttrId], references: [id])
+  attrNames  AttributesName      @relation(fields: [attrNameId], references: [id])
+
+  @@index([chAttrId])
   @@index([attrNameId])
 }
 
 model AttributesName {
-  id           String                @id
-  chAttributes CharacterAttributes[]
-  name         String
-  values       AttributesValues[]
+  id     String                    @id
+  name   String
+  chAttr CharacterAttributesName[]
+  values AttributesValues[]
 }
 
 model AttributesValues {
