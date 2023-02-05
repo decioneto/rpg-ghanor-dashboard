@@ -38,4 +38,12 @@ export class PrismaUserRepository implements UserRepository {
             },
         });
     }
+
+    createUserRole(userId: string, roleId: string): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+
+    findUserById(userId: string): Promise<User> {
+        throw new Error('Method not implemented.');
+    }
 }

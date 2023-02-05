@@ -1,4 +1,4 @@
-import { RoleLevelEnum, RoleNameEnum } from '@/enums/RoleEnum';
+import { RoleNameEnum } from '@/enums/RoleEnum';
 import { InMemoryRoleRepository } from '@/test/repositories/in-memory-role-repository';
 import { CreateRole } from './create-role';
 

@@ -5,7 +5,7 @@ export interface RoleProps {
     id?: string;
     createdAt?: Date;
     roleName: RoleNameEnum;
-    roleLevel: RoleLevelEnum;
+    roleLevel?: RoleLevelEnum;
 }
 
 export class Role {
@@ -35,7 +35,7 @@ export class Role {
         return this.props.roleName;
     }
 
-    public set roleLevel(roleLevel: RoleLevelEnum) {
+    public set roleLevel(roleLevel: RoleLevelEnum | undefined) {
         this.props.roleLevel = roleLevel;
     }
 

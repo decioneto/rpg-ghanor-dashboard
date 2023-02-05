@@ -27,4 +27,18 @@ export class InMemoryUserRepository implements UserRepository {
 
         this.users.splice(userIndex, 1);
     }
+
+    createUserRole(userId: string, roleId: string): Promise<void> {
+        throw new Error('Method not implemented.');
+    }
+
+    async findUserById(userId: string): Promise<User | null> {
+        const user = this.users.find((user) => user.id === userId);
+
+        if (!user) {
+            return null;
+        }
+
+        return user;
+    }
 }
