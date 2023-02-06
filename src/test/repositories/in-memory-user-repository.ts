@@ -3,6 +3,10 @@ import { UserRepository } from '@/app/repositories/user-repository';
 
 export class InMemoryUserRepository implements UserRepository {
     public users: User[] = [];
+    public userRole: { userId: string; roleId: string } = {
+        userId: '',
+        roleId: '',
+    };
 
     async create(user: User): Promise<void> {
         this.users.push(user);
@@ -18,7 +22,7 @@ export class InMemoryUserRepository implements UserRepository {
         return user;
     }
 
-    async deleteUser(userId: string): Promise<void> {
+    async delete(userId: string): Promise<void> {
         const userIndex = this.users.findIndex((user) => user.id === userId);
 
         if (!userIndex) {
@@ -28,11 +32,7 @@ export class InMemoryUserRepository implements UserRepository {
         this.users.splice(userIndex, 1);
     }
 
-    createUserRole(userId: string, roleId: string): Promise<void> {
-        throw new Error('Method not implemented.');
-    }
-
-    async findUserById(userId: string): Promise<User | null> {
+    async findById(userId: string): Promise<User | null> {
         const user = this.users.find((user) => user.id === userId);
 
         if (!user) {
@@ -40,5 +40,14 @@ export class InMemoryUserRepository implements UserRepository {
         }
 
         return user;
+    }
+
+    async createUserRole(userId: string, roleId: string): Promise<void> {
+        this.userRole.userId = userId;
+        this.userRole.roleId = roleId;
+    }
+
+    async getUsers(): Promise<User[]> {
+        return this.users;
     }
 }

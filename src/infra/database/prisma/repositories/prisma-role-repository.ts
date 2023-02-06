@@ -17,10 +17,10 @@ export class PrismaRoleRepository implements RoleRepository {
         });
     }
 
-    async findRoleById(roleId: string): Promise<Role | null> {
-        const role = await this.prismaService.role.findUnique({
+    async findByName(roleName: string): Promise<Role | null> {
+        const role = await this.prismaService.role.findFirst({
             where: {
-                id: roleId,
+                roleName: roleName,
             },
         });
 

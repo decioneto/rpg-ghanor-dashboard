@@ -14,6 +14,6 @@ export class DeleteUser {
             throw new Error('User do not exists');
         }
 
-        await this.userRepository.deleteUser(userId);
+        await this.userRepository.delete(userId);
     }
 }

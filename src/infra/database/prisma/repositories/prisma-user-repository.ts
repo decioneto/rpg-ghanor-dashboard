@@ -1,10 +1,17 @@
 import { User } from '@/app/entities/user';
 import { UserRepository } from '@/app/repositories/user-repository';
+import { randomUUID } from 'crypto';
 import { PrismaUserMapper } from '../mappers/prisma-user-mapper';
 import { PrismaService } from '../prisma-service';
 
 export class PrismaUserRepository implements UserRepository {
     constructor(private prismaService: PrismaService) {}
+
+    async getUsers(): Promise<User[]> {
+        const users = await this.prismaService.user.findMany();
+
+        return users.map((user) => PrismaUserMapper.toDomain(user));
+    }
 
     async create(user: User): Promise<void> {
         await this.prismaService.user.create({
@@ -31,7 +38,7 @@ export class PrismaUserRepository implements UserRepository {
         return PrismaUserMapper.toDomain(user);
     }
 
-    async deleteUser(userId: string): Promise<void> {
+    async delete(userId: string): Promise<void> {
         await this.prismaService.user.delete({
             where: {
                 id: userId,
@@ -39,11 +46,25 @@ export class PrismaUserRepository implements UserRepository {
         });
     }
 
-    createUserRole(userId: string, roleId: string): Promise<void> {
-        throw new Error('Method not implemented.');
+    async findById(userId: string): Promise<User | null> {
+        const user = await this.prismaService.user.findUnique({
+            where: {
+                id: userId,
+            },
+        });
+
+        if (!user) return null;
+
+        return PrismaUserMapper.toDomain(user);
     }
 
-    findUserById(userId: string): Promise<User> {
-        throw new Error('Method not implemented.');
+    async createUserRole(userId: string, roleId: string): Promise<void> {
+        await this.prismaService.userRole.create({
+            data: {
+                id: randomUUID(),
+                userId: userId,
+                roleId: roleId,
+            },
+        });
     }
 }

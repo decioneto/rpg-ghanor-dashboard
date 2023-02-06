@@ -21,7 +21,7 @@ describe('Create UserRole', () => {
 
         await createUserRole.execute({
             userId: newUser.id,
-            roleId: newRole.id,
+            roleName: newRole.roleName,
         });
 
         expect(userRepository.users[0].role).toEqual(newRole);

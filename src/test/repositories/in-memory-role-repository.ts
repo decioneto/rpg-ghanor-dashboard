@@ -8,8 +8,8 @@ export class InMemoryRoleRepository implements RoleRepository {
         this.roles.push(role);
     }
 
-    async findRoleById(roleId: string): Promise<Role | null> {
-        const role = this.roles.find((role) => role.id === roleId);
+    async findByName(roleName: string): Promise<Role | null> {
+        const role = this.roles.find((role) => role.roleName === roleName);
 
         if (!role) return null;
 
