@@ -1,18 +1,19 @@
-import { CreateRole } from '@/app/use-cases/create-role';
-import { CreateRoleDTO } from '@/dtos/create-role-dto';
+import { GetRole } from '@/app/use-cases/get-role';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaRoleRepository } from '@/infra/database/prisma/repositories/prisma-role-repository';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-interface CreateRoleRequest extends NextApiRequest {
-    body: CreateRoleDTO;
+interface GetRoleRequest extends NextApiRequest {
+    query: {
+        roleId: string;
+    };
 }
 
-export default async function createRoleController(
-    req: CreateRoleRequest,
+export default async function getRoleController(
+    req: GetRoleRequest,
     res: NextApiResponse
 ) {
-    if (req.method !== 'POST') {
+    if (req.method !== 'GET') {
         return res.status(405).json({
             message: 'Method not allowed',
             status: 'failed',
@@ -21,15 +22,15 @@ export default async function createRoleController(
 
     const prismaService = new PrismaService();
     const roleRepository = new PrismaRoleRepository(prismaService);
-    const createRole = new CreateRole(roleRepository);
-    const { roleName } = req.body;
+    const getRole = new GetRole(roleRepository);
+    const { roleId } = req.query;
 
     try {
-        const { role } = await createRole.execute({
-            roleName,
+        const { role } = await getRole.execute({
+            roleId,
         });
 
-        return res.status(201).json({
+        return res.status(200).json({
             data: {
                 role: {
                     id: role.id,

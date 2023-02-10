@@ -10,7 +10,6 @@ export class PrismaRoleRepository implements RoleRepository {
         await this.prismaService.role.create({
             data: {
                 id: role.id,
-                userId: role.userId,
                 createdAt: role.createdAt,
                 roleLevel: role.roleLevel!,
                 roleName: role.roleName,
@@ -22,6 +21,18 @@ export class PrismaRoleRepository implements RoleRepository {
         const role = await this.prismaService.role.findFirst({
             where: {
                 roleName: roleName,
+            },
+        });
+
+        if (!role) return null;
+
+        return PrismaRoleMapper.toDomain(role);
+    }
+
+    async findById(roleId: string): Promise<Role | null> {
+        const role = await this.prismaService.role.findUnique({
+            where: {
+                id: roleId,
             },
         });
 
