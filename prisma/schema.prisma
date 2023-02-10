@@ -17,27 +17,19 @@ model User {
   createdAt       DateTime          @default(now())
   username        String            @unique
   password        String
-  roles           UserRole[]
+  roles           Role[]
   characterSheets CharacterSheets[]
 }
 
 model Role {
-  id        String     @id
-  createdAt DateTime   @default(now())
+  id        String   @id
+  createdAt DateTime @default(now())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
   roleName  String
   roleLevel Int
-  users     UserRole[]
-}
-
-model UserRole {
-  id     String @id
-  userId String
-  roleId String
-  user   User   @relation(fields: [userId], references: [id])
-  role   Role   @relation(fields: [roleId], references: [id])
 
   @@index([userId])
-  @@index([roleId])
 }
 
 model CharacterSheets {
@@ -52,37 +44,31 @@ model CharacterSheets {
 }
 
 model CharacterAttributes {
-  id          String                    @id
-  chSheetId   String
-  chSheets    CharacterSheets           @relation(fields: [chSheetId], references: [id])
-  chAttrNames CharacterAttributesName[]
+  id         String          @id
+  createdAt  DateTime        @default(now())
+  chSheetId  String
+  chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id])
+  attrNameId String
+  attrName   AttributesName  @relation(fields: [attrNameId], references: [id])
 
   @@index([chSheetId])
-}
-
-model CharacterAttributesName {
-  id         String              @id
-  chAttrId   String
-  attrNameId String
-  chAttr     CharacterAttributes @relation(fields: [chAttrId], references: [id])
-  attrNames  AttributesName      @relation(fields: [attrNameId], references: [id])
-
-  @@index([chAttrId])
   @@index([attrNameId])
 }
 
 model AttributesName {
-  id     String                    @id
-  name   String
-  chAttr CharacterAttributesName[]
-  values AttributesValues[]
+  id               String                @id
+  createdAt        DateTime              @default(now())
+  chAttributes     CharacterAttributes[]
+  AttributesValues AttributesValues[]
+  name             String
 }
 
 model AttributesValues {
-  id        String         @id
-  attNameId String
-  attName   AttributesName @relation(fields: [attNameId], references: [id])
-  value     String
+  id         String         @id
+  createdAt  DateTime       @default(now())
+  attrNameId String
+  attrName   AttributesName @relation(fields: [attrNameId], references: [id])
+  value      String
 
-  @@index([attNameId])
+  @@index([attrNameId])
 }
