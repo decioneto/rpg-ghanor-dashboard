@@ -3,10 +3,6 @@ import { UserRepository } from '@/app/repositories/user-repository';
 
 export class InMemoryUserRepository implements UserRepository {
     public users: User[] = [];
-    public userRole: { userId: string; roleId: string } = {
-        userId: '',
-        roleId: '',
-    };
 
     async create(user: User): Promise<void> {
         this.users.push(user);
@@ -40,11 +36,6 @@ export class InMemoryUserRepository implements UserRepository {
         }
 
         return user;
-    }
-
-    async createUserRole(userId: string, roleId: string): Promise<void> {
-        this.userRole.userId = userId;
-        this.userRole.roleId = roleId;
     }
 
     async getUsers(): Promise<User[]> {

@@ -1,3 +1,5 @@
+import { RoleNameEnum } from '@/enums/RoleEnum';
+import { Role } from './role';
 import { User } from './user';
 
 describe('User', () => {
@@ -5,6 +7,9 @@ describe('User', () => {
         const user = new User({
             username: 'decioneto',
             password: '0123456',
+            role: new Role({
+                roleName: RoleNameEnum.MASTER,
+            }),
         });
 
         expect(user).toBeInstanceOf(User);

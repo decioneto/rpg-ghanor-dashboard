@@ -8,6 +8,7 @@ export class PrismaUserMapper {
             createdAt: raw.createdAt,
             username: raw.username,
             password: raw.password,
+            roleId: raw.roleId,
         });
     }
 }

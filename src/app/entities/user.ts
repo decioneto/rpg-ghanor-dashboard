@@ -1,4 +1,3 @@
-import { RoleNameEnum } from '@/enums/RoleEnum';
 import { randomUUID } from 'crypto';
 import { Role } from './role';
 
@@ -7,7 +6,7 @@ export interface UserProps {
     createdAt?: Date;
     username: string;
     password: string;
-    role?: Role;
+    roleId: string;
 }
 
 export class User {
@@ -45,11 +44,11 @@ export class User {
         return this.props.password;
     }
 
-    public get role() {
-        return this.props.role;
+    public set roleId(roleId: string) {
+        this.props.roleId = roleId;
     }
 
-    public set role(role: Role | undefined) {
-        this.props.role = role;
+    public get roleId() {
+        return this.props.roleId;
     }
 }

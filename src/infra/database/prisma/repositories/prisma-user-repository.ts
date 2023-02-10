@@ -1,6 +1,5 @@
 import { User } from '@/app/entities/user';
 import { UserRepository } from '@/app/repositories/user-repository';
-import { randomUUID } from 'crypto';
 import { PrismaUserMapper } from '../mappers/prisma-user-mapper';
 import { PrismaService } from '../prisma-service';
 
@@ -20,6 +19,11 @@ export class PrismaUserRepository implements UserRepository {
                 createdAt: user.createdAt,
                 username: user.username,
                 password: user.password,
+                roles: {
+                    connect: {
+                        id: user.role.id,
+                    },
+                },
             },
         });
     }
@@ -56,15 +60,5 @@ export class PrismaUserRepository implements UserRepository {
         if (!user) return null;
 
         return PrismaUserMapper.toDomain(user);
-    }
-
-    async createUserRole(userId: string, roleId: string): Promise<void> {
-        await this.prismaService.userRole.create({
-            data: {
-                id: randomUUID(),
-                userId: userId,
-                roleId: roleId,
-            },
-        });
     }
 }

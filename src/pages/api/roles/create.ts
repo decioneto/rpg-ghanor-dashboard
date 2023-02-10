@@ -22,7 +22,7 @@ export default async function createRoleController(
     const prismaService = new PrismaService();
     const roleRepository = new PrismaRoleRepository(prismaService);
     const createRole = new CreateRole(roleRepository);
-    const { roleName } = req.body;
+    const { roleName, userId } = req.body;
 
     try {
         const { role } = await createRole.execute({

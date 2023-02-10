@@ -1,3 +1,4 @@
+import { makeUser } from '@/test/factories/user-factory';
 import { InMemoryUserRepository } from '@/test/repositories/in-memory-user-repository';
 import { GetUsers } from './get-users';
 
@@ -6,6 +7,12 @@ describe('Get users', () => {
         const userRepository = new InMemoryUserRepository();
         const getUsers = new GetUsers(userRepository);
 
-        expect(await getUsers.execute()).toBeTruthy();
+        const newUser = makeUser();
+
+        userRepository.create(newUser);
+
+        const { users } = await getUsers.execute();
+
+        expect(users).toEqual(userRepository.users);
     });
 });

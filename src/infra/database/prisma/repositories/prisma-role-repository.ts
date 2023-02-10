@@ -10,6 +10,7 @@ export class PrismaRoleRepository implements RoleRepository {
         await this.prismaService.role.create({
             data: {
                 id: role.id,
+                userId: role.userId,
                 createdAt: role.createdAt,
                 roleLevel: role.roleLevel!,
                 roleName: role.roleName,

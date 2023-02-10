@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 
 export interface RoleProps {
     id?: string;
+    userId?: string | null;
     createdAt?: Date;
     roleName: RoleNameEnum;
     roleLevel?: RoleLevelEnum;
@@ -25,6 +26,14 @@ export class Role {
 
     public get createdAt() {
         return this.props.createdAt;
+    }
+
+    public set userId(userId: string | null | undefined) {
+        this.props.userId = userId;
+    }
+
+    public get userId() {
+        return this.props.userId;
     }
 
     public set roleName(roleName: RoleNameEnum) {

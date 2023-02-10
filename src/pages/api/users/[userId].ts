@@ -1,19 +1,19 @@
-import { CreateUser } from '@/app/use-cases/create-user';
+import { GetSingleUser } from '@/app/use-cases/get-single-user';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
-import { PrismaRoleRepository } from '@/infra/database/prisma/repositories/prisma-role-repository';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { CreateUserDTO } from '../../../dtos/create-user-dto';
 
-interface CreatUserRequest extends NextApiRequest {
-    body: CreateUserDTO;
+interface GetSingleUserRequest extends NextApiRequest {
+    query: {
+        userId: string;
+    };
 }
 
-export default async function createUserController(
-    req: CreatUserRequest,
+export default async function getSingleUser(
+    req: GetSingleUserRequest,
     res: NextApiResponse
 ) {
-    if (req.method !== 'POST') {
+    if (req.method !== 'GET') {
         return res.status(405).json({
             message: 'Method not allowed',
             status: 'failed',
@@ -22,27 +22,21 @@ export default async function createUserController(
 
     const prismaService = new PrismaService();
     const userRepository = new PrismaUserRepository(prismaService);
-    const roleRepository = new PrismaRoleRepository(prismaService);
-    const createUser = new CreateUser(userRepository, roleRepository);
-
-    const { username, password, roleName } = req.body;
+    const getSingleUser = new GetSingleUser(userRepository);
+    const { userId } = req.query;
 
     try {
-        const { user } = await createUser.execute({
-            username,
-            password,
-            roleName,
-        });
+        const { user } = await getSingleUser.execute({ userId });
 
-        return res.status(201).json({
+        return res.status(200).json({
             data: {
                 user: {
                     id: user.id,
+                    createdAt: user.createdAt,
                     username: user.username,
                     roleId: user.roleId,
                 },
             },
-            status: 'success',
         });
     } catch (err: Error | any) {
         return res.status(400).json({

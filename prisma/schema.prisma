@@ -17,19 +17,19 @@ model User {
   createdAt       DateTime          @default(now())
   username        String            @unique
   password        String
-  roles           Role[]
+  roleId          String
+  roles           Role              @relation(fields: [roleId], references: [id])
   characterSheets CharacterSheets[]
+
+  @@index([roleId])
 }
 
 model Role {
   id        String   @id
   createdAt DateTime @default(now())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
   roleName  String
   roleLevel Int
-
-  @@index([userId])
+  users     User[]
 }
 
 model CharacterSheets {
