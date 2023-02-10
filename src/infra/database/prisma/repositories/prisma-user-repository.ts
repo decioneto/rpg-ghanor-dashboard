@@ -21,7 +21,7 @@ export class PrismaUserRepository implements UserRepository {
                 password: user.password,
                 roles: {
                     connect: {
-                        id: user.role.id,
+                        id: user.roleId,
                     },
                 },
             },
