@@ -40,10 +40,8 @@ export default async function authenticateUserController(
 
         return res.status(200).json({
             data: {
-                user: {
-                    username: user.username,
-                },
                 token,
+                user,
                 role,
             },
             status: 'success',
