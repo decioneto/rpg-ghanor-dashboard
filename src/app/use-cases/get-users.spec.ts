@@ -7,7 +7,7 @@ describe('Get users', () => {
         const userRepository = new InMemoryUserRepository();
         const getUsers = new GetUsers(userRepository);
 
-        const newUser = makeUser();
+        const newUser = await makeUser();
 
         userRepository.create(newUser);
 

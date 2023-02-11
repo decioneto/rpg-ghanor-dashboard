@@ -1,16 +1,15 @@
-import { Role } from '@/app/entities/role';
 import { User, UserProps } from '@/app/entities/user';
-import { RoleNameEnum } from '@/enums/RoleEnum';
+import { hash } from 'bcryptjs';
 
 type Override = Partial<UserProps>;
 
-export function makeUser(override: Override = {}) {
+export async function makeUser(override: Override = {}) {
+    const passwordHash = await hash('1234', 8);
+
     return new User({
         username: 'decioneto',
-        password: '1234',
-        role: new Role({
-            roleName: RoleNameEnum.PLAYER,
-        }),
+        password: passwordHash,
+        roleId: '25067227-3a0c-47f4-ac7a-ae8273f54a4f',
         ...override,
     });
 }

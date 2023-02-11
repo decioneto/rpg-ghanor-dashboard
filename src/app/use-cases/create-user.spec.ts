@@ -34,7 +34,7 @@ describe('Create User', () => {
         const createUser = new CreateUser(userRepository, roleRepository);
         const createRole = new CreateRole(roleRepository);
 
-        const user = makeUser();
+        const user = await makeUser();
         const role = makeRole();
 
         await createRole.execute({ roleName: role.roleName });

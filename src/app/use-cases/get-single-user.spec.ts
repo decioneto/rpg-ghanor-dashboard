@@ -7,7 +7,7 @@ describe('Find user by username', () => {
         const userRepository = new InMemoryUserRepository();
         const getSingleUser = new GetSingleUser(userRepository);
 
-        const newUser = makeUser();
+        const newUser = await makeUser();
 
         await userRepository.create(newUser);
 
