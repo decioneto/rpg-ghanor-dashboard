@@ -1,4 +1,4 @@
-import { GetUsers } from '@/app/use-cases/get-users';
+import { GetUsers } from '@/app/use-cases/user/get-users';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';
 import { NextApiRequest, NextApiResponse } from 'next';

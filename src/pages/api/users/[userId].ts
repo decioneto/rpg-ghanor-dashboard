@@ -1,4 +1,4 @@
-import { GetSingleUser } from '@/app/use-cases/get-single-user';
+import { GetSingleUser } from '@/app/use-cases/user/get-single-user';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';
 import { NextApiRequest, NextApiResponse } from 'next';
