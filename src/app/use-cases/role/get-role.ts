@@ -1,5 +1,5 @@
-import { Role } from '../entities/role';
-import { RoleRepository } from '../repositories/role-repository';
+import { Role } from '../../entities/role';
+import { RoleRepository } from '../../repositories/role-repository';
 
 interface GetRoleRequest {
     roleId: string;

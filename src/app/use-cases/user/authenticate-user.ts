@@ -1,7 +1,7 @@
 import { compare, hash } from 'bcryptjs';
 import { randomUUID } from 'crypto';
-import { RoleRepository } from '../repositories/role-repository';
-import { UserRepository } from '../repositories/user-repository';
+import { RoleRepository } from '../../repositories/role-repository';
+import { UserRepository } from '../../repositories/user-repository';
 
 interface AuthenticateUserRequest {
     username: string;

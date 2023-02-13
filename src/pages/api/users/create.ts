@@ -1,4 +1,4 @@
-import { CreateUser } from '@/app/use-cases/create-user';
+import { CreateUser } from '@/app/use-cases/user/create-user';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaRoleRepository } from '@/infra/database/prisma/repositories/prisma-role-repository';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';

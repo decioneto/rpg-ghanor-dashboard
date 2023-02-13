@@ -1,8 +1,8 @@
 import { RoleNameEnum } from '@/enums/RoleEnum';
 import { hash } from 'bcryptjs';
-import { User } from '../entities/user';
-import { RoleRepository } from '../repositories/role-repository';
-import { UserRepository } from '../repositories/user-repository';
+import { User } from '../../entities/user';
+import { RoleRepository } from '../../repositories/role-repository';
+import { UserRepository } from '../../repositories/user-repository';
 
 interface CreateUserRequest {
     username: string;
