@@ -1,3 +1,4 @@
+import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
 import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
 import { PrismaAttributeNameMapper } from '../mappers/prisma-characterAttribute-mapper';
@@ -30,5 +31,23 @@ export class PrismaCharacterSheetsRepository
         if (!attributeName) return null;
 
         return PrismaAttributeNameMapper.toDomain(attributeName);
+    }
+
+    async findAttributeById(id: string): Promise<AttributeName | null> {
+        throw new Error('Method not implemented.');
+    }
+
+    async createAttributeValue(attributeValue: AttributeValue): Promise<void> {
+        await this.prismaService.attributesValues.create({
+            data: {
+                id: attributeValue.id,
+                value: attributeValue.value,
+                attrName: {
+                    connect: {
+                        id: attributeValue.attributeNameId,
+                    },
+                },
+            },
+        });
     }
 }

@@ -3,7 +3,7 @@ import { randomUUID } from 'crypto';
 export interface AttributeValueProps {
     id?: string;
     createdAt?: Date;
-    value: string | string[];
+    value: string;
     attributeNameId: string;
 }
 
@@ -25,7 +25,7 @@ export class AttributeValue {
         return this.props.createdAt;
     }
 
-    public set value(value: string | string[]) {
+    public set value(value: string) {
         this.props.value = value;
     }
 
