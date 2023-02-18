@@ -1,4 +1,4 @@
-import { UserRepository } from '../repositories/user-repository';
+import { UserRepository } from '../../repositories/user-repository';
 
 interface DeleteUserRequest {
     userId: string;
@@ -11,7 +11,7 @@ export class DeleteUser {
         const { userId } = request;
 
         if (!userId) {
-            throw new Error('User do not exists');
+            throw new Error('User not found');
         }
 
         await this.userRepository.delete(userId);

@@ -19,7 +19,7 @@ export class GetSingleUser {
         const user = await this.userRepository.findById(userId);
 
         if (!user) {
-            throw new Error('User does not exists');
+            throw new Error('User not found');
         }
 
         return {

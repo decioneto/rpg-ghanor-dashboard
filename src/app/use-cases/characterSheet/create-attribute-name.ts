@@ -14,7 +14,7 @@ export class CreateAttributeName {
             await this.characterSheetRepository.findAttributeByName(name);
 
         if (attributeNameExists) {
-            throw new Error('Attribute name already exists');
+            throw new Error(`Attribute name ${name} already exists`);
         }
 
         const attributeName = new AttributeName({

@@ -31,19 +31,21 @@ export class AuthenticateUser {
         const user = await this.userRepository.findByUsername(username);
 
         if (!user) {
-            throw new Error('User does not exists');
+            throw new Error('Incorrect username or password');
         }
+
+        console.log(password);
 
         const isSamePasseword = await compare(password, user.password);
 
         if (!isSamePasseword) {
-            throw new Error('Password is wrong');
+            throw new Error('Incorrect username or password');
         }
 
         const role = await this.roleRepository.findById(user.roleId);
 
         if (!role) {
-            throw new Error('Role does not exists');
+            throw new Error('Role not found');
         }
 
         return {

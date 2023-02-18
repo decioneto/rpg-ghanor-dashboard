@@ -17,7 +17,7 @@ export class GetRole {
         const role = await this.roleRepository.findById(roleId);
 
         if (!role) {
-            throw new Error('Role does not exists');
+            throw new Error('Role not found');
         }
 
         return {

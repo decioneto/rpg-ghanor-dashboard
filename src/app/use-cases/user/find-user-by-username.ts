@@ -20,7 +20,7 @@ export class FindUserByUsername {
         const user = await this.userRepository.findByUsername(username);
 
         if (!user) {
-            throw new Error('User do not exists');
+            throw new Error('User not found');
         }
 
         return {

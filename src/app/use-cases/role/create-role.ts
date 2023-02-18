@@ -1,6 +1,6 @@
 import { RoleLevelEnum, RoleNameEnum } from '@/enums/RoleEnum';
-import { Role } from '../entities/role';
-import { RoleRepository } from '../repositories/role-repository';
+import { Role } from '../../entities/role';
+import { RoleRepository } from '../../repositories/role-repository';
 
 interface CreateRoleRequest {
     roleName: RoleNameEnum;

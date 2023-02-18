@@ -30,7 +30,7 @@ export class CreateUser {
         }
 
         if (!role) {
-            throw new Error('Role does not exists');
+            throw new Error(`Role ${roleName} not found`);
         }
 
         const passwordHash = await hash(password, 8);

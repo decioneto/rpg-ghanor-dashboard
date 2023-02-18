@@ -21,6 +21,13 @@ export default async function createAttributeValueController(
         });
     }
 
+    if (!req.headers.authorization) {
+        return res.status(403).json({
+            message: 'Not authored',
+            status: 'failed',
+        });
+    }
+
     const prismaService = new PrismaService();
     const characterSheetRepository = new PrismaCharacterSheetsRepository(
         prismaService

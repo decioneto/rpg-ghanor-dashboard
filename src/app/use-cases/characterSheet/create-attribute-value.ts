@@ -18,7 +18,7 @@ export class CreateAttributeValue {
             );
 
         if (!attributeName) {
-            throw new Error('Attribute name does not exists');
+            throw new Error('Attribute name not found');
         }
 
         const attributeValue = new AttributeValue({
