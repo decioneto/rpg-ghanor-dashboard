@@ -2,6 +2,7 @@ import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
 import { CharacterSheet } from '@/app/entities/characterSheet';
 import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
+import { randomUUID } from 'crypto';
 import {
     PrismaAttributeNameMapper,
     PrismaAttributeValueMapper,
@@ -14,6 +15,9 @@ export class PrismaCharacterSheetsRepository
     constructor(private prismaService: PrismaService) {}
 
     async createCharacterSheet(characterSheet: CharacterSheet): Promise<void> {
+        const attributeNames =
+            await this.prismaService.attributesName.findMany();
+
         await this.prismaService.characterSheets.create({
             data: {
                 id: characterSheet.id,
@@ -23,6 +27,18 @@ export class PrismaCharacterSheetsRepository
                     connect: {
                         id: characterSheet.userId,
                     },
+                },
+                chAttributes: {
+                    create: attributeNames.map((item) => {
+                        return {
+                            id: randomUUID(),
+                            attrName: {
+                                connect: {
+                                    id: item.id,
+                                },
+                            },
+                        };
+                    }),
                 },
             },
         });

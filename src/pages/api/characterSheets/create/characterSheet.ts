@@ -22,6 +22,13 @@ export default async function createCharacterSheetController(
         });
     }
 
+    if (!req.headers.authorization) {
+        return res.status(403).json({
+            message: 'Not authored',
+            status: 'failed',
+        });
+    }
+
     const prismaService = new PrismaService();
     const characterSheetRepository = new PrismaCharacterSheetsRepository(
         prismaService
@@ -32,4 +39,21 @@ export default async function createCharacterSheetController(
         characterSheetRepository
     );
     const { charName, userId } = req.body;
+
+    try {
+        await createCharacterSheet.execute({
+            userId,
+            charName,
+        });
+
+        res.status(201).json({
+            data: {},
+            status: 'success',
+        });
+    } catch (err: Error | any) {
+        return res.status(400).json({
+            message: err.message,
+            status: 'failed',
+        });
+    }
 }
