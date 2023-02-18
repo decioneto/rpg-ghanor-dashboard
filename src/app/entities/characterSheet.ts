@@ -1,20 +1,13 @@
-import { AttributeNameEnum } from '@/enums/AttributesNameEnum';
 import { randomUUID } from 'crypto';
-
-interface CharacterAttributes {
-    attribute: AttributeNameEnum;
-    value: string | string[];
-}
 
 export interface CharacterSheetsProps {
     id?: string;
     createdAt?: Date;
     userId: string;
     chName: string;
-    charAttributes: CharacterAttributes[];
 }
 
-export class CharacterSheets {
+export class CharacterSheet {
     private _id: string;
     private props: CharacterSheetsProps;
 
@@ -33,6 +26,10 @@ export class CharacterSheets {
         return this.props.createdAt;
     }
 
+    public set userId(userId: string) {
+        this.props.userId = userId;
+    }
+
     public get userId() {
         return this.props.userId;
     }
@@ -43,13 +40,5 @@ export class CharacterSheets {
 
     public get chName() {
         return this.props.chName;
-    }
-
-    public set chAttributes(chAttributes: CharacterAttributes[]) {
-        this.props.charAttributes = chAttributes;
-    }
-
-    public get chAttributes() {
-        return this.props.charAttributes;
     }
 }

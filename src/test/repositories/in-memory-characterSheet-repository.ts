@@ -1,12 +1,18 @@
 import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
+import { CharacterSheet } from '@/app/entities/characterSheet';
 import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
 
 export class InMemoryCharacterSheetRepository
     implements CharacterSheetRepository
 {
+    public characterSheets: CharacterSheet[] = [];
     public attributes: AttributeName[] = [];
     public attributeValues: AttributeValue[] = [];
+
+    async createCharacterSheet(characterSheet: CharacterSheet): Promise<void> {
+        this.characterSheets.push(characterSheet);
+    }
 
     async createAttributeName(attributeName: AttributeName): Promise<void> {
         this.attributes.push(attributeName);

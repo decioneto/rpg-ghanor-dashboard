@@ -1,7 +1,9 @@
 import { AttributeValue } from '../entities/attribute-value';
 import { AttributeName } from '../entities/attributeName';
+import { CharacterSheet } from '../entities/characterSheet';
 
 export interface CharacterSheetRepository {
+    createCharacterSheet(characterSheet: CharacterSheet): Promise<void>;
     createAttributeName(attributeName: AttributeName): Promise<void>;
     findAttributeByName(name: string): Promise<AttributeName | null>;
     findAttributeById(attributeNameId: string): Promise<AttributeName | null>;

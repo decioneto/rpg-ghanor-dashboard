@@ -1,5 +1,6 @@
 import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
+import { CharacterSheet } from '@/app/entities/characterSheet';
 import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
 import {
     PrismaAttributeNameMapper,
@@ -11,6 +12,21 @@ export class PrismaCharacterSheetsRepository
     implements CharacterSheetRepository
 {
     constructor(private prismaService: PrismaService) {}
+
+    async createCharacterSheet(characterSheet: CharacterSheet): Promise<void> {
+        await this.prismaService.characterSheets.create({
+            data: {
+                id: characterSheet.id,
+                createdAt: characterSheet.createdAt,
+                chName: characterSheet.chName,
+                user: {
+                    connect: {
+                        id: characterSheet.userId,
+                    },
+                },
+            },
+        });
+    }
 
     async createAttributeName(attributeName: AttributeName): Promise<void> {
         await this.prismaService.attributesName.create({
