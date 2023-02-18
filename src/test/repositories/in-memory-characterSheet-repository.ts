@@ -14,6 +14,20 @@ export class InMemoryCharacterSheetRepository
         this.characterSheets.push(characterSheet);
     }
 
+    async findCharacterSheets(
+        userId: string
+    ): Promise<CharacterSheet[] | null> {
+        const characterSheets = this.characterSheets.filter(
+            (characterSheet) => {
+                return characterSheet.userId === userId;
+            }
+        );
+
+        if (!characterSheets.length) return null;
+
+        return characterSheets;
+    }
+
     async createAttributeName(attributeName: AttributeName): Promise<void> {
         this.attributes.push(attributeName);
     }

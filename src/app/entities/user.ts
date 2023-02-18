@@ -1,5 +1,4 @@
 import { randomUUID } from 'crypto';
-import { Role } from './role';
 
 export interface UserProps {
     id?: string;

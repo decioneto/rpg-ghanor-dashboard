@@ -4,6 +4,7 @@ import { CharacterSheet } from '../entities/characterSheet';
 
 export interface CharacterSheetRepository {
     createCharacterSheet(characterSheet: CharacterSheet): Promise<void>;
+    findCharacterSheets(userId: string): Promise<CharacterSheet[] | null>;
     createAttributeName(attributeName: AttributeName): Promise<void>;
     findAttributeByName(name: string): Promise<AttributeName | null>;
     findAttributeById(attributeNameId: string): Promise<AttributeName | null>;
