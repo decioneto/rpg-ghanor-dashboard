@@ -22,9 +22,11 @@ export class InMemoryCharacterSheetRepository
         return attributeName;
     }
 
-    async findAttributeById(id: string): Promise<AttributeName | null> {
+    async findAttributeById(
+        attributeNameId: string
+    ): Promise<AttributeName | null> {
         const attribute = this.attributes.find((attribute) => {
-            return attribute.id === id;
+            return attribute.id === attributeNameId;
         });
 
         if (!attribute) return null;

@@ -1,16 +1,17 @@
-import { CreateAttributeName } from '@/app/use-cases/characterSheet/create-attribute-name';
+import { CreateAttributeValue } from '@/app/use-cases/characterSheet/create-attribute-value';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaCharacterSheetsRepository } from '@/infra/database/prisma/repositories/prisma-characterSheet-repositiory';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-interface CreateAttributeNameRequest extends NextApiRequest {
+interface CreateAttributeValueRequest extends NextApiRequest {
     body: {
-        name: string;
+        attributeNameId: string;
+        value: string;
     };
 }
 
-export default async function createAttributeNameController(
-    req: CreateAttributeNameRequest,
+export default async function createAttributeValueController(
+    req: CreateAttributeValueRequest,
     res: NextApiResponse
 ) {
     if (req.method !== 'POST') {
@@ -24,14 +25,16 @@ export default async function createAttributeNameController(
     const characterSheetRepository = new PrismaCharacterSheetsRepository(
         prismaService
     );
-    const createAttributeName = new CreateAttributeName(
+    const createAttributeValue = new CreateAttributeValue(
         characterSheetRepository
     );
-
-    const { name } = req.body;
+    const { attributeNameId, value } = req.body;
 
     try {
-        await createAttributeName.execute({ name });
+        await createAttributeValue.execute({
+            attributeNameId,
+            value,
+        });
 
         res.status(201).json({
             data: {},

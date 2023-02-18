@@ -33,8 +33,18 @@ export class PrismaCharacterSheetsRepository
         return PrismaAttributeNameMapper.toDomain(attributeName);
     }
 
-    async findAttributeById(id: string): Promise<AttributeName | null> {
-        throw new Error('Method not implemented.');
+    async findAttributeById(
+        attributeNameId: string
+    ): Promise<AttributeName | null> {
+        const attribute = await this.prismaService.attributesName.findUnique({
+            where: {
+                id: attributeNameId,
+            },
+        });
+
+        if (!attribute) return null;
+
+        return PrismaAttributeNameMapper.toDomain(attribute);
     }
 
     async createAttributeValue(attributeValue: AttributeValue): Promise<void> {
