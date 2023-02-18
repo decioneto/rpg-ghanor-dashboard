@@ -16,6 +16,15 @@ export class PrismaAttributeNameMapper {
 }
 
 export class PrismaAttributeValueMapper {
+    static toPrisma(attributeValue: AttributeValue) {
+        return {
+            id: attributeValue.id,
+            createdAt: attributeValue.createdAt,
+            attributeNameId: attributeValue.attributeNameId,
+            value: attributeValue.value,
+        };
+    }
+
     static toDomain(raw: RawAttributesValues): AttributeValue {
         return new AttributeValue({
             id: raw.id,

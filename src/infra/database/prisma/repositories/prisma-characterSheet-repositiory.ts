@@ -1,7 +1,10 @@
 import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
 import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
-import { PrismaAttributeNameMapper } from '../mappers/prisma-characterAttribute-mapper';
+import {
+    PrismaAttributeNameMapper,
+    PrismaAttributeValueMapper,
+} from '../mappers/prisma-characterAttribute-mapper';
 import { PrismaService } from '../prisma-service';
 
 export class PrismaCharacterSheetsRepository
@@ -51,10 +54,46 @@ export class PrismaCharacterSheetsRepository
         await this.prismaService.attributesValues.create({
             data: {
                 id: attributeValue.id,
+                createdAt: attributeValue.createdAt,
                 value: attributeValue.value,
                 attrName: {
                     connect: {
                         id: attributeValue.attributeNameId,
+                    },
+                },
+            },
+        });
+    }
+
+    async findAttributeValueById(
+        attributeValueId: string
+    ): Promise<AttributeValue | null> {
+        const attributeValue =
+            await this.prismaService.attributesValues.findUnique({
+                where: {
+                    id: attributeValueId,
+                },
+            });
+
+        if (!attributeValue) return null;
+
+        return PrismaAttributeValueMapper.toDomain(attributeValue);
+    }
+
+    async updateAttributeValue(attributeValue: AttributeValue): Promise<void> {
+        const raw = PrismaAttributeValueMapper.toPrisma(attributeValue);
+
+        await this.prismaService.attributesValues.update({
+            where: {
+                id: raw.id,
+            },
+            data: {
+                id: raw.id,
+                createdAt: raw.createdAt,
+                value: raw.value,
+                attrName: {
+                    connect: {
+                        id: raw.attributeNameId,
                     },
                 },
             },

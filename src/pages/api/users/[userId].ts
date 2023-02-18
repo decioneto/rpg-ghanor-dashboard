@@ -9,7 +9,7 @@ interface GetSingleUserRequest extends NextApiRequest {
     };
 }
 
-export default async function getSingleUser(
+export default async function getSingleUserController(
     req: GetSingleUserRequest,
     res: NextApiResponse
 ) {

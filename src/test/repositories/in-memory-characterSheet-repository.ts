@@ -37,4 +37,26 @@ export class InMemoryCharacterSheetRepository
     async createAttributeValue(attributeValue: AttributeValue): Promise<void> {
         this.attributeValues.push(attributeValue);
     }
+
+    async findAttributeValueById(
+        attributeValueId: string
+    ): Promise<AttributeValue | null> {
+        const attributeValue = this.attributeValues.find((attributeValue) => {
+            return attributeValue.id === attributeValueId;
+        });
+
+        if (!attributeValue) return null;
+
+        return attributeValue;
+    }
+
+    async updateAttributeValue(attributeValue: AttributeValue): Promise<void> {
+        const attributeValueIndex = this.attributeValues.findIndex((item) => {
+            item.id === attributeValue.id;
+        });
+
+        if (attributeValueIndex >= 0) {
+            this.attributeValues[attributeValueIndex] = attributeValue;
+        }
+    }
 }

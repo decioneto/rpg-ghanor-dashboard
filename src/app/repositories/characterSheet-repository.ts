@@ -6,4 +6,8 @@ export interface CharacterSheetRepository {
     findAttributeByName(name: string): Promise<AttributeName | null>;
     findAttributeById(attributeNameId: string): Promise<AttributeName | null>;
     createAttributeValue(attributeValue: AttributeValue): Promise<void>;
+    findAttributeValueById(
+        attributeValueId: string
+    ): Promise<AttributeValue | null>;
+    updateAttributeValue(attributeValue: AttributeValue): Promise<void>;
 }
