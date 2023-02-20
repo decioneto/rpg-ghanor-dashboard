@@ -7,7 +7,7 @@ interface GetUserCharacterSheetsRequest {
 }
 
 interface GetUserCharacterSheetsResponse {
-    characterSheet: CharacterSheet[];
+    characterSheets: CharacterSheet[];
 }
 
 export class GetUserCharacterSheets {
@@ -27,15 +27,15 @@ export class GetUserCharacterSheets {
             throw new Error('User not found');
         }
 
-        const characterSheet =
+        const characterSheets =
             await this.characterSheetRepository.findCharacterSheets(user.id);
 
-        if (!characterSheet) {
+        if (!characterSheets) {
             throw new Error('Character Sheet not found');
         }
 
         return {
-            characterSheet,
+            characterSheets,
         };
     }
 }

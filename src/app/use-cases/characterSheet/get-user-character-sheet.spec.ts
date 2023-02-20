@@ -24,10 +24,10 @@ describe('Get Character Sheet', () => {
             })
         );
 
-        const { characterSheet } = await getUserCharacterSheets.execute({
+        const { characterSheets } = await getUserCharacterSheets.execute({
             userId: user.id,
         });
 
-        expect(characterSheet).toBeTruthy;
+        expect(characterSheets).toBeTruthy;
     });
 });

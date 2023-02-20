@@ -4,8 +4,10 @@ import { CharacterSheet } from '@/app/entities/characterSheet';
 import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
 import { randomUUID } from 'crypto';
 import {
+    CharacterSheetsMapperResponse,
     PrismaAttributeNameMapper,
     PrismaAttributeValueMapper,
+    PrismaCharacterSheetsMapper,
 } from '../mappers/prisma-characterAttribute-mapper';
 import { PrismaService } from '../prisma-service';
 
@@ -41,6 +43,41 @@ export class PrismaCharacterSheetsRepository
                     }),
                 },
             },
+        });
+    }
+
+    async findCharacterSheets(
+        userId: string
+    ): Promise<CharacterSheetsMapperResponse[] | null> {
+        const characterSheets =
+            await this.prismaService.characterSheets.findMany({
+                where: {
+                    userId: userId,
+                },
+                include: {
+                    chAttributes: {
+                        select: {
+                            attrName: {
+                                select: {
+                                    name: true,
+                                    AttributesValues: {
+                                        select: {
+                                            value: true,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+
+        if (!characterSheets) return null;
+
+        return characterSheets.map((characterSheet) => {
+            return PrismaCharacterSheetsMapper.toDomain({
+                characterSheet,
+            });
         });
     }
 

@@ -16,7 +16,7 @@ export default async function attributeValueController(
     req: UpdateAttributeValueRequest,
     res: NextApiResponse
 ) {
-    if (req.method === 'PUT') {
+    if (req.method === 'PATCH') {
         if (!req.headers.authorization) {
             return res.status(403).json({
                 message: 'Not authored',
