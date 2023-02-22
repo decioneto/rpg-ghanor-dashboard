@@ -1,10 +1,12 @@
 import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
 import { CharacterSheet } from '@/app/entities/characterSheet';
-import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
+import {
+    CharacterSheetRepository,
+    CharacterSheetsWithAttributes,
+} from '@/app/repositories/characterSheet-repository';
 import { randomUUID } from 'crypto';
 import {
-    CharacterSheetsMapperResponse,
     PrismaAttributeNameMapper,
     PrismaAttributeValueMapper,
     PrismaCharacterSheetsMapper,
@@ -48,7 +50,7 @@ export class PrismaCharacterSheetsRepository
 
     async findCharacterSheets(
         userId: string
-    ): Promise<CharacterSheetsMapperResponse[] | null> {
+    ): Promise<CharacterSheetsWithAttributes[] | null> {
         const characterSheets =
             await this.prismaService.characterSheets.findMany({
                 where: {
@@ -74,11 +76,7 @@ export class PrismaCharacterSheetsRepository
 
         if (!characterSheets) return null;
 
-        return characterSheets.map((characterSheet) => {
-            return PrismaCharacterSheetsMapper.toDomain({
-                characterSheet,
-            });
-        });
+        return characterSheets;
     }
 
     async createAttributeName(attributeName: AttributeName): Promise<void> {

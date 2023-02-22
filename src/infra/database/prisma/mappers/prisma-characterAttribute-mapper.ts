@@ -1,10 +1,12 @@
 import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
 import { CharacterSheet } from '@/app/entities/characterSheet';
+import { CharacterSheetsWithAttributes } from '@/app/repositories/characterSheet-repository';
 import {
     AttributesName as RawAttributeName,
     AttributesValues as RawAttributesValues,
     CharacterSheets as RawCharacterSheets,
+    Prisma,
 } from '@prisma/client';
 
 interface CharacterSheetQuery {
@@ -19,28 +21,16 @@ interface CharacterSheetQuery {
         }[];
     };
 }
-export interface CharacterSheetsMapperResponse {
-    characterSheet: CharacterSheet;
-    chAttributes: {
-        attrName: {
-            name: string;
-            AttributesValues: {
-                value: string;
-            }[];
-        };
-    }[];
-}
-
 export class PrismaCharacterSheetsMapper {
-    static toDomain(raw: CharacterSheetQuery): CharacterSheetsMapperResponse {
+    static toDomain(raw: CharacterSheetsWithAttributes) {
         return {
             characterSheet: new CharacterSheet({
-                id: raw.characterSheet.id,
-                createdAt: raw.characterSheet.createdAt,
-                userId: raw.characterSheet.userId,
-                chName: raw.characterSheet.chName,
+                id: raw.id,
+                createdAt: raw.createdAt,
+                userId: raw.userId,
+                chName: raw.chName,
             }),
-            chAttributes: raw.characterSheet.chAttributes.map((chAttribute) => {
+            chAttributes: raw.chAttributes.map((chAttribute) => {
                 return {
                     attrName: {
                         name: chAttribute.attrName.name,

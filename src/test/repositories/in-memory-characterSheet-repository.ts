@@ -1,7 +1,10 @@
 import { AttributeValue } from '@/app/entities/attribute-value';
 import { AttributeName } from '@/app/entities/attributeName';
 import { CharacterSheet } from '@/app/entities/characterSheet';
-import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
+import {
+    CharacterSheetRepository,
+    CharacterSheetsWithAttributes,
+} from '@/app/repositories/characterSheet-repository';
 
 export class InMemoryCharacterSheetRepository
     implements CharacterSheetRepository
@@ -16,7 +19,7 @@ export class InMemoryCharacterSheetRepository
 
     async findCharacterSheets(
         userId: string
-    ): Promise<CharacterSheet[] | null> {
+    ): Promise<CharacterSheetsWithAttributes[] | null> {
         const characterSheets = this.characterSheets.filter(
             (characterSheet) => {
                 return characterSheet.userId === userId;
@@ -25,7 +28,20 @@ export class InMemoryCharacterSheetRepository
 
         if (!characterSheets.length) return null;
 
-        return characterSheets;
+        const attributeWithValues = this.attributes.map((attribute) => {
+            return {
+                chAttributes: {
+                    attrName: {
+                        name: attribute.name,
+                        AttributesValues: {
+                            value: this.attributeValues[0],
+                        },
+                    },
+                },
+            };
+        });
+
+        return characterSheets[0], attributeWithValues;
     }
 
     async createAttributeName(attributeName: AttributeName): Promise<void> {
