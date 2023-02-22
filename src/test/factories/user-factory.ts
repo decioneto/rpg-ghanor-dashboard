@@ -1,4 +1,4 @@
-import { User, UserProps } from '@/app/entities/user';
+import { User, UserProps } from '@/main/entities/user';
 import { hash } from 'bcryptjs';
 
 type Override = Partial<UserProps>;

@@ -1,4 +1,4 @@
-import { DeleteUser } from '@/app/use-cases/delete-user';
+import { DeleteUser } from '@/main/use-cases/delete-user';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';
 import { NextApiRequest, NextApiResponse } from 'next';

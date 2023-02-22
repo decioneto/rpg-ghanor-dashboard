@@ -1,4 +1,4 @@
-import { Role, RoleProps } from '@/app/entities/role';
+import { Role, RoleProps } from '@/main/entities/role';
 import { RoleNameEnum } from '@/enums/RoleEnum';
 
 type Override = Partial<RoleProps>;

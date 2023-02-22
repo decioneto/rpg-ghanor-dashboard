@@ -1,4 +1,4 @@
-import { CharacterSheet } from '@/app/entities/characterSheet';
+import { CharacterSheet } from '@/main/entities/characterSheet';
 import { makeUser } from '@/test/factories/user-factory';
 import { InMemoryCharacterSheetRepository } from '@/test/repositories/in-memory-characterSheet-repository';
 import { InMemoryUserRepository } from '@/test/repositories/in-memory-user-repository';

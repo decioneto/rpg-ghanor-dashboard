@@ -1,10 +1,10 @@
-import { AttributeValue } from '@/app/entities/attribute-value';
-import { AttributeName } from '@/app/entities/attributeName';
-import { CharacterSheet } from '@/app/entities/characterSheet';
+import { AttributeValue } from '@/main/entities/attribute-value';
+import { AttributeName } from '@/main/entities/attributeName';
+import { CharacterSheet } from '@/main/entities/characterSheet';
 import {
     CharacterSheetRepository,
     CharacterSheetsWithAttributes,
-} from '@/app/repositories/characterSheet-repository';
+} from '@/main/repositories/characterSheet-repository';
 import { randomUUID } from 'crypto';
 import {
     PrismaAttributeNameMapper,

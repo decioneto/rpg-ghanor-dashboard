@@ -1,4 +1,4 @@
-import { AuthenticateUser } from '@/app/use-cases/user/authenticate-user';
+import { AuthenticateUser } from '@/main/use-cases/user/authenticate-user';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaRoleRepository } from '@/infra/database/prisma/repositories/prisma-role-repository';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';

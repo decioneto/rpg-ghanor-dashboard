@@ -1,4 +1,4 @@
-import { AttributeValue } from '@/app/entities/attribute-value';
+import { AttributeValue } from '@/main/entities/attribute-value';
 
 type Override = Partial<AttributeValue>;
 

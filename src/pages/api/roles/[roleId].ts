@@ -1,4 +1,4 @@
-import { GetRole } from '@/app/use-cases/role/get-role';
+import { GetRole } from '@/main/use-cases/role/get-role';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaRoleRepository } from '@/infra/database/prisma/repositories/prisma-role-repository';
 import { NextApiRequest, NextApiResponse } from 'next';

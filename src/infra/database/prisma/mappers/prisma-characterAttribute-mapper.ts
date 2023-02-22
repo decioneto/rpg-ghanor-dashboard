@@ -1,7 +1,7 @@
-import { AttributeValue } from '@/app/entities/attribute-value';
-import { AttributeName } from '@/app/entities/attributeName';
-import { CharacterSheet } from '@/app/entities/characterSheet';
-import { CharacterSheetsWithAttributes } from '@/app/repositories/characterSheet-repository';
+import { AttributeValue } from '@/main/entities/attribute-value';
+import { AttributeName } from '@/main/entities/attributeName';
+import { CharacterSheet } from '@/main/entities/characterSheet';
+import { CharacterSheetsWithAttributes } from '@/main/repositories/characterSheet-repository';
 import {
     AttributesName as RawAttributeName,
     AttributesValues as RawAttributesValues,

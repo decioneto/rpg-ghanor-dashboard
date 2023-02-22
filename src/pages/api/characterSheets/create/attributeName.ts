@@ -1,4 +1,4 @@
-import { CreateAttributeName } from '@/app/use-cases/characterSheet/create-attribute-name';
+import { CreateAttributeName } from '@/main/use-cases/characterSheet/create-attribute-name';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaCharacterSheetsRepository } from '@/infra/database/prisma/repositories/prisma-characterSheet-repositiory';
 import { NextApiRequest, NextApiResponse } from 'next';

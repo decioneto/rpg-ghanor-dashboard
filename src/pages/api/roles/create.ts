@@ -1,4 +1,4 @@
-import { CreateRole } from '@/app/use-cases/create-role';
+import { CreateRole } from '@/main/use-cases/create-role';
 import { CreateRoleDTO } from '@/dtos/create-role-dto';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaRoleRepository } from '@/infra/database/prisma/repositories/prisma-role-repository';

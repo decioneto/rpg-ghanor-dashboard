@@ -1,5 +1,5 @@
-import { AttributeValue } from '@/app/entities/attribute-value';
-import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
+import { AttributeValue } from '@/main/entities/attribute-value';
+import { CharacterSheetRepository } from '@/main/repositories/characterSheet-repository';
 
 interface CreateAttributeValueRequest {
     attributeNameId: string;

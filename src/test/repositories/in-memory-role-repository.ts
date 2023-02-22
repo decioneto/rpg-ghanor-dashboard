@@ -1,5 +1,5 @@
-import { Role } from '@/app/entities/role';
-import { RoleRepository } from '@/app/repositories/role-repository';
+import { Role } from '@/main/entities/role';
+import { RoleRepository } from '@/main/repositories/role-repository';
 
 export class InMemoryRoleRepository implements RoleRepository {
     public roles: Role[] = [];

@@ -1,4 +1,4 @@
-import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
+import { CharacterSheetRepository } from '@/main/repositories/characterSheet-repository';
 
 interface UpdateAttributeValueRequest {
     attributeValueId: string;

@@ -1,5 +1,5 @@
-import { Role } from '@/app/entities/role';
-import { RoleRepository } from '@/app/repositories/role-repository';
+import { Role } from '@/main/entities/role';
+import { RoleRepository } from '@/main/repositories/role-repository';
 import { PrismaRoleMapper } from '../mappers/prisma-role-mapper';
 import { PrismaService } from '../prisma-service';
 

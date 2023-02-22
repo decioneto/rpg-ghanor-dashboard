@@ -1,4 +1,4 @@
-import { Role } from '@/app/entities/role';
+import { Role } from '@/main/entities/role';
 import { Role as RawRole } from '@prisma/client';
 
 export class PrismaRoleMapper {

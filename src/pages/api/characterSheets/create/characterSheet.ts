@@ -1,4 +1,4 @@
-import { CreateCharacterSheet } from '@/app/use-cases/characterSheet/create-character-sheet';
+import { CreateCharacterSheet } from '@/main/use-cases/characterSheet/create-character-sheet';
 import { PrismaService } from '@/infra/database/prisma/prisma-service';
 import { PrismaCharacterSheetsRepository } from '@/infra/database/prisma/repositories/prisma-characterSheet-repositiory';
 import { PrismaUserRepository } from '@/infra/database/prisma/repositories/prisma-user-repository';

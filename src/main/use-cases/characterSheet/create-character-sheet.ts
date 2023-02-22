@@ -1,6 +1,6 @@
-import { CharacterSheet } from '@/app/entities/characterSheet';
-import { CharacterSheetRepository } from '@/app/repositories/characterSheet-repository';
-import { UserRepository } from '@/app/repositories/user-repository';
+import { CharacterSheet } from '@/main/entities/characterSheet';
+import { CharacterSheetRepository } from '@/main/repositories/characterSheet-repository';
+import { UserRepository } from '@/main/repositories/user-repository';
 
 interface CreateCharacterSheetRequest {
     userId: string;
