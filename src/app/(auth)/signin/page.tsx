@@ -1,5 +1,7 @@
+import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Logo } from '@/components/Logo';
+import { EyeOff } from 'react-feather';
 
 export default function SignIn() {
     return (
@@ -25,10 +27,10 @@ export default function SignIn() {
                         hasLabel={true}
                         labelText={'Senha'}
                         width={400}
+                        inputIcon={<EyeOff />}
                     />
-
                     <div className="flex gap-4 ml-auto">
-                        <button>Criar conta</button>
+                        <Button>Criar conta</Button>
                         <button>Login</button>
                     </div>
                 </form>

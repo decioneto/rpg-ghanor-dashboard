@@ -1,4 +1,5 @@
 import { HTMLInputTypeAttribute } from 'react';
+import { Icon } from '../Icon';
 
 interface InputProps {
     type: HTMLInputTypeAttribute;
@@ -7,29 +8,28 @@ interface InputProps {
     id: string;
     placeholder: string;
     width: number;
+    inputIcon?: JSX.Element;
 }
 
-export function Input({
-    type,
-    hasLabel,
-    labelText,
-    id,
-    placeholder,
-    width,
-}: InputProps) {
+export function Input(props: InputProps) {
     return (
-        <div className="flex flex-col gap-2">
-            {hasLabel && (
-                <label htmlFor={id} className="text-yellow-100">
-                    {labelText}
+        <div className="flex flex-col gap-2 relative">
+            {props.hasLabel && (
+                <label htmlFor={props.id} className="text-yellow-100">
+                    {props.labelText}
                 </label>
             )}
             <input
-                className={`min-w-[${width}px] py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100`}
-                type={type}
-                id={id}
-                placeholder={placeholder}
+                className={`min-w-[${props.width}px] py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100 uppercase`}
+                type={props.type}
+                id={props.id}
+                placeholder={props.placeholder}
             />
+            {props.inputIcon && (
+                <Icon className="absolute bottom-6 translate-y-1/2 right-4">
+                    {props.inputIcon}
+                </Icon>
+            )}
         </div>
     );
 }
