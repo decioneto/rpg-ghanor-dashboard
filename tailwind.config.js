@@ -25,6 +25,8 @@ module.exports = {
         backgroundImage: {
             authLeft: "url('/images/bg-scales-left.png')",
             authRight: "url('/images/bg-scales-right.png')",
+            gradient: 'linear-gradient(to bottom, #353535, #242424)',
+            gradientHover: 'linear-gradient(to top, #353535, #242424)',
         },
     },
     plugins: [],

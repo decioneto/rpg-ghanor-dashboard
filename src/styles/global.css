@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .btn-primary {
+        @apply text-yellow-900 bg-yellow-100;
+    }
+    .btn-secondary {
+        @apply text-yellow-900 bg-gradient hover:bg-gradientHover transition-colors;
+    }
+    .btn-tertiary {
+        @apply text-neutral-500 hover:text-yellow-100 transition-colors;
+    }
+}
