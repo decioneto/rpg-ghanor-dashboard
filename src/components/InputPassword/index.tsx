@@ -1,18 +1,23 @@
-import { HTMLInputTypeAttribute } from 'react';
+import { useState } from 'react';
 import { Icon } from '../Icon';
+import { ViewPassword } from '../ViewPassword';
 
-interface InputProps {
-    type: HTMLInputTypeAttribute;
+interface InputPasswordProps {
     hasLabel: boolean;
     labelText?: string;
     id: string;
     placeholder: string;
     width: number;
     inputIcon?: JSX.Element;
-    isPassword?: boolean;
 }
 
-export function Input(props: InputProps) {
+export function InputPassword(props: InputPasswordProps) {
+    const [isVisible, setIsVisible] = useState(false);
+
+    function handleVisible() {
+        setIsVisible(!isVisible);
+    }
+
     return (
         <div className="flex flex-col gap-2 relative">
             {props.hasLabel && (
@@ -22,7 +27,7 @@ export function Input(props: InputProps) {
             )}
             <input
                 className="min-w-[400px] py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100 uppercase"
-                type={props.type}
+                type={isVisible ? 'text' : 'password'}
                 id={props.id}
                 placeholder={props.placeholder}
             />
@@ -31,6 +36,8 @@ export function Input(props: InputProps) {
                     {props.inputIcon}
                 </Icon>
             )}
+
+            <ViewPassword handleVisible={handleVisible} isVisible={isVisible} />
         </div>
     );
 }
