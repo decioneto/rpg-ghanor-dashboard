@@ -7,7 +7,7 @@ interface InputProps {
     labelText?: string;
     id: string;
     placeholder: string;
-    width: number;
+    width?: number;
     inputIcon?: JSX.Element;
     isPassword?: boolean;
 }

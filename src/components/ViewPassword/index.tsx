@@ -8,6 +8,7 @@ interface ViewPasswordProps {
 export function ViewPassword(props: ViewPasswordProps) {
     return (
         <button
+            type="button"
             className="absolute bottom-5 translate-y-1/2 right-4"
             onClick={props.handleVisible}
         >

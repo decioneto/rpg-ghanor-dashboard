@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { Icon } from '../Icon';
 import { ViewPassword } from '../ViewPassword';
@@ -7,7 +9,7 @@ interface InputPasswordProps {
     labelText?: string;
     id: string;
     placeholder: string;
-    width: number;
+    width?: number;
     inputIcon?: JSX.Element;
 }
 

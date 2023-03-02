@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    .h3 {
+        @apply text-2xl;
+    }
+}
+
 @layer components {
     .btn-primary {
         @apply text-yellow-900 bg-yellow-100;
