@@ -3,7 +3,7 @@ import { Icon } from '../Icon';
 
 interface InputProps {
     type: HTMLInputTypeAttribute;
-    hasLabel: boolean;
+    hasLabel?: boolean;
     labelText?: string;
     id: string;
     placeholder: string;

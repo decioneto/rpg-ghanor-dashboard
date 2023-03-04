@@ -1,6 +1,7 @@
 import { Button, ButtonEnum } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { InputPassword } from '@/components/InputPassword';
+import { SelectInput } from '@/components/Select';
 import Link from 'next/link';
 
 export default function Register() {
@@ -16,13 +17,7 @@ export default function Register() {
                     hasLabel={true}
                     labelText="Nome do usuário"
                 />
-                <Input
-                    type="text"
-                    id="role"
-                    placeholder="Selecione"
-                    hasLabel={true}
-                    labelText="Selecione o seu papel"
-                />
+                <SelectInput id="role" hasLabel labelText="Papel" />
                 <InputPassword
                     id="password"
                     placeholder="Senha"
