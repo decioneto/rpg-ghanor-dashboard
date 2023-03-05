@@ -21,7 +21,7 @@ export function Input(props: InputProps) {
                 </label>
             )}
             <input
-                className="min-w-[400px] py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100 uppercase"
+                className="min-w-[400px] py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100"
                 type={props.type}
                 id={props.id}
                 placeholder={props.placeholder}
