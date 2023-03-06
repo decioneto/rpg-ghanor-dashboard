@@ -1,4 +1,5 @@
 import { HTMLInputTypeAttribute } from 'react';
+import { FieldValues, UseFormRegister } from 'react-hook-form/dist/types';
 import { Icon } from '../Icon';
 
 interface InputProps {
@@ -10,6 +11,7 @@ interface InputProps {
     width?: number;
     inputIcon?: JSX.Element;
     isPassword?: boolean;
+    register?: UseFormRegister<FieldValues>;
 }
 
 export function Input(props: InputProps) {
@@ -25,6 +27,7 @@ export function Input(props: InputProps) {
                 type={props.type}
                 id={props.id}
                 placeholder={props.placeholder}
+                {...props.register}
             />
             {props.inputIcon && (
                 <Icon className="absolute bottom-6 translate-y-1/2 right-4">

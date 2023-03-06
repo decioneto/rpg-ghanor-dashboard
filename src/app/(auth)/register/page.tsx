@@ -1,9 +1,12 @@
+'use client';
+
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 import { Button, ButtonEnum } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { InputPassword } from '@/components/InputPassword';
 import { SelectInput, SelectItemsProps } from '@/components/Select';
 import { RoleNameEnum } from '@/enums/RoleEnum';
-import Link from 'next/link';
 
 const SELECT_ITEMS: SelectItemsProps[] = [
     {
@@ -16,30 +19,48 @@ const SELECT_ITEMS: SelectItemsProps[] = [
     },
 ];
 
-export default function Register() {
-    return (
-        <div>
-            <h3 className="h3 text-yellow-900 pb-8">Criar novo cadastro</h3>
+interface SubmitResponse {
+    user: string;
+    role: string;
+    password: string;
+}
 
-            <form className="flex flex-col gap-8">
+export default function Register() {
+    const { register, handleSubmit } = useForm<SubmitResponse>();
+
+    function handleFormSubmit(data: SubmitResponse) {
+        console.log(data);
+    }
+
+    return (
+        <div className="flex flex-col md:flex-row gap-8 items-center">
+            <form
+                className="flex flex-col gap-8"
+                onSubmit={handleSubmit(handleFormSubmit)}
+            >
+                <h3 className="h3 text-yellow-900">Criar novo cadastro</h3>
+
                 <Input
                     type="text"
                     id="username"
                     placeholder="Usuário"
                     hasLabel={true}
                     labelText="Nome do usuário"
+                    register={register('user')}
                 />
                 <SelectInput
                     id="role"
                     hasLabel
                     labelText="Papel"
                     itens={SELECT_ITEMS}
+                    {...register('role')}
                 />
                 <InputPassword
                     id="password"
                     placeholder="Senha"
                     hasLabel={true}
                     labelText="Crie uma senha"
+                    {...register('password')}
                 />
                 <InputPassword
                     id="confirm-password"
@@ -59,15 +80,14 @@ export default function Register() {
                 </div>
             </form>
 
-            <div className="absolute inset-y-0 -right-24 text-yellow-900 bg-neutral-300 p-4 h-fit rounded text-xs">
-                <h6>Regras para a senha</h6>
-                <p>Deve ter no mínimo 8 caracteres</p>
-                <p>Deve conter pelo menos:</p>
-                <ul>
+            <div className="text-yellow-900 bg-neutral-300 p-4 h-fit rounded text-[10px]">
+                <h6>A senha deve conter:</h6>
+                <ul className="text-neutral-500">
+                    <li>No mínimo 8 caracteres;</li>
                     <li>Uma letra maíuscula;</li>
                     <li>Uma letra minúscula;</li>
                     <li>Um caractere especial;</li>
-                    <li>Uma numeral;</li>
+                    <li>Um numeral;</li>
                 </ul>
             </div>
         </div>
