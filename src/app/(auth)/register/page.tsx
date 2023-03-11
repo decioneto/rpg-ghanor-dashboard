@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues, Controller } from 'react-hook-form';
 import { Button, ButtonEnum } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { InputPassword } from '@/components/InputPassword';
 import { SelectInput, SelectItemsProps } from '@/components/Select';
 import { RoleNameEnum } from '@/enums/RoleEnum';
+import { useEffect } from 'react';
+import { ValidatePassword } from '@/utils/validatePassword';
 
 const SELECT_ITEMS: SelectItemsProps[] = [
     {
@@ -19,17 +21,32 @@ const SELECT_ITEMS: SelectItemsProps[] = [
     },
 ];
 
-interface SubmitResponse {
+export interface SubmitResponse {
     user: string;
     role: string;
     password: string;
+    confirmPass: string;
 }
 
 export default function Register() {
-    const { register, handleSubmit } = useForm<SubmitResponse>();
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+        setError,
+    } = useForm<SubmitResponse>({
+        defaultValues: {
+            user: '',
+            password: '',
+            role: '',
+        },
+    });
 
-    function handleFormSubmit(data: SubmitResponse) {
-        console.log(data);
+    function handleFormSubmit({ user, role, password }: SubmitResponse) {
+        if (!ValidatePassword.execute(password)) return;
+
+        console.log(user, role, password);
     }
 
     return (
@@ -38,7 +55,9 @@ export default function Register() {
                 className="flex flex-col gap-8"
                 onSubmit={handleSubmit(handleFormSubmit)}
             >
-                <h3 className="h3 text-yellow-900">Criar novo cadastro</h3>
+                <h3 className="h3 text-yellow-900 flex-1">
+                    Criar novo cadastro
+                </h3>
 
                 <Input
                     type="text"
@@ -46,27 +65,60 @@ export default function Register() {
                     placeholder="Usuário"
                     hasLabel={true}
                     labelText="Nome do usuário"
-                    register={register('user')}
+                    register={{
+                        ...register('user', { required: true }),
+                    }}
+                    errors={errors.user}
                 />
-                <SelectInput
-                    id="role"
-                    hasLabel
-                    labelText="Papel"
-                    itens={SELECT_ITEMS}
-                    {...register('role')}
+                <Controller
+                    control={control}
+                    name="role"
+                    rules={{ required: true }}
+                    render={({
+                        field: { onChange },
+                        formState: { errors },
+                    }) => (
+                        <SelectInput
+                            id="role"
+                            hasLabel
+                            labelText="Papel"
+                            itens={SELECT_ITEMS}
+                            register={register}
+                            name="role"
+                            onChange={onChange}
+                            errors={errors.role}
+                        />
+                    )}
                 />
                 <InputPassword
                     id="password"
                     placeholder="Senha"
                     hasLabel={true}
                     labelText="Crie uma senha"
-                    {...register('password')}
+                    register={{
+                        ...register('password', {
+                            required: {
+                                value: true,
+                                message: 'Este campo é obrigatório',
+                            },
+                        }),
+                    }}
+                    errors={errors.password}
                 />
                 <InputPassword
                     id="confirm-password"
                     placeholder="Confirme sua senha"
                     hasLabel={true}
                     labelText="Confirme sua senha"
+                    register={{
+                        ...register('confirmPass', {
+                            required: {
+                                value: true,
+                                message: 'Este campo é obrigatório',
+                            },
+                        }),
+                    }}
+                    errors={errors.confirmPass}
                 />
 
                 <div className="flex gap-4 ml-auto">

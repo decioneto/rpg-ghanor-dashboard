@@ -2,14 +2,20 @@
 
 import React, { ReactNode } from 'react';
 import * as Select from '@radix-ui/react-select';
+import { FieldError } from 'react-hook-form';
 import { Check, ChevronDown } from 'react-feather';
 import { RoleNameEnum } from '@/enums/RoleEnum';
+import { ErrorMessage } from '../Input/ErrorMessage';
 
 interface SelectInputProps {
     hasLabel?: boolean;
     labelText?: string;
     id: string;
     itens: SelectItemsProps[];
+    register: any;
+    name: string;
+    onChange: (...event: any[]) => void;
+    errors?: FieldError | undefined;
 }
 
 export interface SelectItemsProps {
@@ -25,7 +31,7 @@ export function SelectInput(props: SelectInputProps) {
                     {props.labelText}
                 </label>
             )}
-            <Select.Root>
+            <Select.Root onValueChange={props.onChange}>
                 <Select.Trigger className="flex items-center justify-between py-3 px-4 bg-yellow-900 rounded text-black border text-left outline-none">
                     <Select.Value placeholder="Selecione seu papel..." />
                     <Select.Icon>
@@ -53,6 +59,9 @@ export function SelectInput(props: SelectInputProps) {
                     </Select.Content>
                 </Select.Portal>
             </Select.Root>
+            {props.errors && (
+                <ErrorMessage message="Este campo é obrigatório" />
+            )}
         </div>
     );
 }

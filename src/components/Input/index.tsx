@@ -1,6 +1,7 @@
 import { HTMLInputTypeAttribute } from 'react';
-import { FieldValues, UseFormRegister } from 'react-hook-form/dist/types';
+import { FieldError } from 'react-hook-form';
 import { Icon } from '../Icon';
+import { ErrorMessage } from './ErrorMessage';
 
 interface InputProps {
     type: HTMLInputTypeAttribute;
@@ -8,10 +9,10 @@ interface InputProps {
     labelText?: string;
     id: string;
     placeholder: string;
-    width?: number;
     inputIcon?: JSX.Element;
     isPassword?: boolean;
-    register?: UseFormRegister<FieldValues>;
+    register?: any;
+    errors?: FieldError | undefined;
 }
 
 export function Input(props: InputProps) {
@@ -22,17 +23,22 @@ export function Input(props: InputProps) {
                     {props.labelText}
                 </label>
             )}
-            <input
-                className="min-w-[400px] py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100"
-                type={props.type}
-                id={props.id}
-                placeholder={props.placeholder}
-                {...props.register}
-            />
-            {props.inputIcon && (
-                <Icon className="absolute bottom-6 translate-y-1/2 right-4">
-                    {props.inputIcon}
-                </Icon>
+            <div>
+                <input
+                    className="flex-inline w-full py-3 px-4 bg-yellow-900 rounded text-black border placeholder:text-neutral-700 outline-none focus:border focus:border-yellow-100"
+                    type={props.type}
+                    id={props.id}
+                    placeholder={props.placeholder}
+                    {...props.register}
+                />
+                {props.inputIcon && (
+                    <Icon className="absolute top-1/2 -translate-y-1/2 right-4">
+                        {props.inputIcon}
+                    </Icon>
+                )}
+            </div>
+            {props.errors && (
+                <ErrorMessage message="Este campo é obrigatório" />
             )}
         </div>
     );
