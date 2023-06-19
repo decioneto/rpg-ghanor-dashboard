@@ -1,14 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { useForm, FieldValues, Controller } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { Button, ButtonEnum } from '@/components/Button';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/components/Input';
 import { InputPassword } from '@/components/InputPassword';
 import { SelectInput, SelectItemsProps } from '@/components/Select';
 import { RoleNameEnum } from '@/enums/RoleEnum';
-import { useEffect } from 'react';
-import { ValidatePassword } from '@/utils/validatePassword';
 
 const SELECT_ITEMS: SelectItemsProps[] = [
     {
@@ -21,12 +21,17 @@ const SELECT_ITEMS: SelectItemsProps[] = [
     },
 ];
 
-export interface SubmitResponse {
-    user: string;
-    role: string;
-    password: string;
-    confirmPass: string;
-}
+const createUserRegisterSchema = z.object({
+    user: z
+        .string()
+        .nonempty('Este campo é obrigatório')
+        .min(2, 'Seu nome de usuário deve conter pelo menos 2 caracteres'),
+    role: z.string().nonempty('Este campo é obrigatório'),
+    password: z.string().nonempty('Este campo é obrigatório'),
+    confirmPass: z.string().nonempty('Este campo é obrigatório'),
+});
+
+type CreateUserRegisterData = z.infer<typeof createUserRegisterSchema>;
 
 export default function Register() {
     const {
@@ -34,18 +39,15 @@ export default function Register() {
         handleSubmit,
         control,
         formState: { errors },
-        setError,
-    } = useForm<SubmitResponse>({
-        defaultValues: {
-            user: '',
-            password: '',
-            role: '',
-        },
+    } = useForm<CreateUserRegisterData>({
+        resolver: zodResolver(createUserRegisterSchema),
     });
 
-    function handleFormSubmit({ user, role, password }: SubmitResponse) {
-        if (!ValidatePassword.execute(password)) return;
-
+    function handleFormSubmit({
+        user,
+        role,
+        password,
+    }: CreateUserRegisterData) {
         console.log(user, role, password);
     }
 
@@ -66,14 +68,13 @@ export default function Register() {
                     hasLabel={true}
                     labelText="Nome do usuário"
                     register={{
-                        ...register('user', { required: true }),
+                        ...register('user'),
                     }}
                     errors={errors.user}
                 />
                 <Controller
                     control={control}
                     name="role"
-                    rules={{ required: true }}
                     render={({
                         field: { onChange },
                         formState: { errors },
@@ -96,12 +97,7 @@ export default function Register() {
                     hasLabel={true}
                     labelText="Crie uma senha"
                     register={{
-                        ...register('password', {
-                            required: {
-                                value: true,
-                                message: 'Este campo é obrigatório',
-                            },
-                        }),
+                        ...register('password'),
                     }}
                     errors={errors.password}
                 />
@@ -111,12 +107,7 @@ export default function Register() {
                     hasLabel={true}
                     labelText="Confirme sua senha"
                     register={{
-                        ...register('confirmPass', {
-                            required: {
-                                value: true,
-                                message: 'Este campo é obrigatório',
-                            },
-                        }),
+                        ...register('confirmPass'),
                     }}
                     errors={errors.confirmPass}
                 />
@@ -134,7 +125,7 @@ export default function Register() {
 
             <div className="text-yellow-900 bg-neutral-300 p-4 h-fit rounded text-[10px]">
                 <h6>A senha deve conter:</h6>
-                <ul className="text-neutral-500">
+                <ul>
                     <li>No mínimo 8 caracteres;</li>
                     <li>Uma letra maíuscula;</li>
                     <li>Uma letra minúscula;</li>

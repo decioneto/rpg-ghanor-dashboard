@@ -37,9 +37,7 @@ export function Input(props: InputProps) {
                     </Icon>
                 )}
             </div>
-            {props.errors && (
-                <ErrorMessage message="Este campo é obrigatório" />
-            )}
+            {props.errors && <ErrorMessage message={props.errors.message} />}
         </div>
     );
 }

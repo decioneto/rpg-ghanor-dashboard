@@ -6,7 +6,7 @@ const inter = Inter({
 });
 
 interface ErrorMessageProps {
-    message: string;
+    message: string | undefined;
 }
 
 export function ErrorMessage(props: ErrorMessageProps) {
