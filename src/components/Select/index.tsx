@@ -5,7 +5,7 @@ import * as Select from '@radix-ui/react-select';
 import { FieldError } from 'react-hook-form';
 import { Check, ChevronDown } from 'react-feather';
 import { RoleNameEnum } from '@/enums/RoleEnum';
-import { ErrorMessage } from '../Input/ErrorMessage';
+import { InputMessage } from '../Input/InputMessage';
 
 interface SelectInputProps {
     hasLabel?: boolean;
@@ -60,7 +60,7 @@ export function SelectInput(props: SelectInputProps) {
                 </Select.Portal>
             </Select.Root>
             {props.errors && (
-                <ErrorMessage message="Este campo é obrigatório" />
+                <InputMessage message="Este campo é obrigatório" />
             )}
         </div>
     );
