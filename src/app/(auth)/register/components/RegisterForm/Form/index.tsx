@@ -6,21 +6,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormBody } from '../FormBody';
 import { PasswordTips } from '../PasswordTips';
-
-const createUserRegisterSchema = z
-  .object({
-    user: z
-      .string()
-      .nonempty('Este campo é obrigatório')
-      .min(2, 'Seu nome de usuário deve conter pelo menos 2 caracteres'),
-    role: z.string().nonempty('Este campo é obrigatório'),
-    password: z.string().nonempty('Este campo é obrigatório'),
-    confirmPass: z.string().nonempty('Este campo é obrigatório'),
-  })
-  .refine((data) => data.password === data.confirmPass, {
-    message: 'As senhas estão diferentes',
-    path: ['confirmPass'],
-  });
+import { createUserRegisterSchema } from './userSchema';
+import { useState } from 'react';
 
 type CreateUserRegisterData = z.infer<typeof createUserRegisterSchema>;
 
@@ -33,6 +20,7 @@ export function Form() {
   } = useForm<CreateUserRegisterData>({
     resolver: zodResolver(createUserRegisterSchema),
   });
+  const [password, setPassword] = useState('');
 
   function handleFormSubmit(data: CreateUserRegisterData) {
     console.log(data);
