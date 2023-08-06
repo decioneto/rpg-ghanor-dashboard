@@ -30,23 +30,23 @@ export function FormBody({ register, errors, control }: FormBodyProps) {
         <Input.Field
           id="user-name"
           placeholder="Escolha o nome do seu usuário"
-          register={{ ...register('user') }}
+          register={{ ...register('username') }}
           type="text"
         ></Input.Field>
-        <Input.Message message={errors.user} />
+        <Input.Message message={errors.username} />
       </Input.Root>
       <Controller
         control={control}
-        name="role"
+        name="roleName"
         render={({ field: { onChange } }) => (
           <SelectInput
-            id="role"
+            id="roleName"
             hasLabel
             labelText="Papel"
             itens={SELECT_ITEMS}
-            register={{ ...register('role') }}
+            register={{ ...register('roleName') }}
             onChange={onChange}
-            errors={errors.role}
+            errors={errors.roleName}
           />
         )}
       />

@@ -13,14 +13,14 @@ interface AuthContextProps {
 
 export const AuthContext = createContext({} as AuthContextProps);
 
-export function AuthContextProvider({ chidren }: { chidren: ReactNode }) {
+export function AuthContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserData>();
 
   function handleSignIn() {}
 
   return (
     <AuthContext.Provider value={{ user, handleSignIn }}>
-      {chidren}
+      {children}
     </AuthContext.Provider>
   );
 }

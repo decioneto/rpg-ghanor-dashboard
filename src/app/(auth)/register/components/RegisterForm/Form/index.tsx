@@ -1,12 +1,14 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Button } from '@/components/Button';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormBody } from '../FormBody';
 import { PasswordTips } from '../PasswordTips';
 import { createUserRegisterSchema } from './userSchema';
+import { api } from '@/services/api';
 
 type CreateUserRegisterData = z.infer<typeof createUserRegisterSchema>;
 
@@ -23,8 +25,23 @@ export function Form() {
 
   const passwordWatch = watch('password', '');
 
-  function handleFormSubmit(data: CreateUserRegisterData) {
-    console.log(data);
+  async function handleFormSubmit({
+    username,
+    roleName,
+    password,
+  }: CreateUserRegisterData) {
+    await api
+      .post('users/create', {
+        username,
+        roleName,
+        password,
+      })
+      .then(() => {
+        toast.success('Usuário criado com sucesso');
+      })
+      .catch((err) => {
+        toast.error(`Erro ao tentar criar o usuário, ${err}`);
+      });
   }
 
   return (

@@ -1,4 +1,4 @@
-import { Button } from '@/components/Button';
+import { Button } from '@components/Button';
 import { SwordIcon } from '@/CustomIcons/SwordIcon';
 import Link from 'next/link';
 

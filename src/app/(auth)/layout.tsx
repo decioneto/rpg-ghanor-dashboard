@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Logo } from '@/components/Logo';
+import { Logo } from '@components/Logo';
 import { Inknut_Antiqua } from '@next/font/google';
 
 const inknutAntiqua = Inknut_Antiqua({

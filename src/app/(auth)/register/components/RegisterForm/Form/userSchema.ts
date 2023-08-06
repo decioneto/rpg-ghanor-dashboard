@@ -2,11 +2,11 @@ import { z } from 'zod';
 
 export const createUserRegisterSchema = z
   .object({
-    user: z
+    username: z
       .string()
       .nonempty('Este campo é obrigatório')
       .min(2, 'Seu nome de usuário deve conter pelo menos 2 caracteres'),
-    role: z.string().nonempty('Este campo é obrigatório'),
+    roleName: z.string().nonempty('Este campo é obrigatório'),
     password: z
       .string()
       .nonempty('Este campo é obrigatório')

@@ -36,7 +36,7 @@ model CharacterSheets {
   id           String                @id
   createdAt    DateTime              @default(now())
   userId       String
-  user         User                  @relation(fields: [userId], references: [id])
+  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   chName       String
   chAttributes CharacterAttributes[]
 
@@ -47,9 +47,9 @@ model CharacterAttributes {
   id         String          @id
   createdAt  DateTime        @default(now())
   chSheetId  String
-  chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id])
+  chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
   attrNameId String
-  attrName   AttributesName  @relation(fields: [attrNameId], references: [id])
+  attrName   AttributesName  @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
 
   @@index([chSheetId])
   @@index([attrNameId])
@@ -67,7 +67,7 @@ model AttributesValues {
   id         String         @id
   createdAt  DateTime       @default(now())
   attrNameId String
-  attrName   AttributesName @relation(fields: [attrNameId], references: [id])
+  attrName   AttributesName @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
   value      String
 
   @@index([attrNameId])
