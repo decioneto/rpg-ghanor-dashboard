@@ -4,7 +4,7 @@ import { Input } from '@/components/Input';
 import { SelectInput, SelectItemsProps } from '@/components/Select';
 import { ViewPassword } from '@/components/ViewPassword';
 import { RoleNameEnum } from '@/enums/RoleEnum';
-import { FormBody } from './types';
+import { FormBodyProps } from './types';
 
 const SELECT_ITEMS: SelectItemsProps[] = [
   {
@@ -17,7 +17,7 @@ const SELECT_ITEMS: SelectItemsProps[] = [
   },
 ];
 
-export function FormBody({ register, errors, control }: FormBody) {
+export function FormBody({ register, errors, control }: FormBodyProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   function handleVisible() {

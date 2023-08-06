@@ -1,6 +1,6 @@
 import { Control, FieldErrors, UseFormRegister } from 'react-hook-form';
 
-export interface FormBody {
+export interface FormBodyProps {
   register: UseFormRegister<{
     user: string;
     role: string;
@@ -13,13 +13,10 @@ export interface FormBody {
     password: string;
     confirmPass: string;
   }>;
-  control: Control<
-    {
-      user: string;
-      role: string;
-      password: string;
-      confirmPass: string;
-    },
-    any
-  >;
+  control: Control<{
+    user: string;
+    role: string;
+    password: string;
+    confirmPass: string;
+  }>;
 }
