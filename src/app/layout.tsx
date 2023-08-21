@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { Inknut_Antiqua } from '@next/font/google';
+import { Inknut_Antiqua } from 'next/font/google';
 import { AuthContextProvider } from '@/contexts/AuthContext';
 
 const inknutAntiqua = Inknut_Antiqua({

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Input } from '@components/Input';
-import { ViewPassword } from '@components/ViewPassword';
+import { Input } from '@/components/Input';
+import { ViewPassword } from '@/components/ViewPassword';
 import { FormBodyProps } from './types';
 
 export function FormBody({ register, errors }: FormBodyProps) {

@@ -1,4 +1,4 @@
-import { Frame } from '@components/Frame';
+import { Frame } from '@/components/Frame';
 import { SignInForm } from './components/SignInForm';
 
 export default function SignInPage() {
