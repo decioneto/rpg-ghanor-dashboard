@@ -1,5 +1,5 @@
-import { RoleNameEnumModel } from '../models';
+import { RoleModel } from '../models';
 
 export interface RoleRepository {
-    createRole: (roleName: RoleNameEnumModel) => Promise<void>;
+    createRole: (role: RoleModel) => Promise<void>;
 }

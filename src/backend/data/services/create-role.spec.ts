@@ -1,5 +1,5 @@
 import { Role } from '@/backend/core/entities';
-import { mockRole } from '@/backend/tests/mocks/role-mock';
+import { mockRole } from '@/backend/tests/mocks/entities/role-mock';
 import { InMemoryRoleRepository } from '@/backend/tests/repositories/role-repository';
 import { CreateRoleService } from './create-role';
 
@@ -22,9 +22,8 @@ function makeRole(): MakeRoleProps {
 describe('Create Role', () => {
     it('should be able to create a role', async () => {
         const { sut, roles } = makeRole();
-        const ruleMock = mockRole();
-
-        sut.create(ruleMock.roleName);
+        const roleMock = mockRole();
+        sut.create(roleMock);
 
         expect(roles).toHaveLength(1);
     });
