@@ -1,21 +1,20 @@
 import { NextResponse } from 'next/server';
 import { ServerError, UnauthorizedError } from '../errors';
-import { HttpResponse } from '../protocols';
 
-export const badRequest = (error: Error): HttpResponse => ({
-    statusCode: 400,
-    data: error,
-});
+export const badRequest = (error: Error) => {
+    return NextResponse.json({ data: error }, { status: 400 });
+};
 
-export const forbidden = (error: Error): HttpResponse => ({
-    statusCode: 403,
-    data: error,
-});
+export const forbidden = (error: Error) => {
+    return NextResponse.json({ data: error }, { status: 403 });
+};
 
-export const unauthorized = (): HttpResponse => ({
-    statusCode: 401,
-    data: new UnauthorizedError(),
-});
+export const unauthorized = () => {
+    return NextResponse.json(
+        { data: new UnauthorizedError() },
+        { status: 401 }
+    );
+};
 
 export const serverError = (err: Error) => {
     return NextResponse.json(
@@ -24,14 +23,10 @@ export const serverError = (err: Error) => {
     );
 };
 
-export const ok = (data: any): HttpResponse => ({
-    statusCode: 200,
-    data: data,
-});
+export const ok = (data: any) => {
+    return NextResponse.json({ data: data }, { status: 201 });
+};
 
 export const created = () => NextResponse.json({ data: '' }, { status: 201 });
 
-export const noContent = (): HttpResponse => ({
-    statusCode: 204,
-    data: null,
-});
+export const noContent = () => NextResponse.json({ data: '' }, { status: 204 });

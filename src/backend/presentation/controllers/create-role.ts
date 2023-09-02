@@ -1,8 +1,9 @@
 import { CreateRoleUseCase } from '@/backend/core/use-cases';
-import { RoleModel, RoleNameEnumModel } from '@/backend/data/models';
+import { RoleNameEnumModel } from '@/backend/data/models';
 import { NextResponse } from 'next/server';
-import { created, serverError } from '../helpers';
-import { Controller, HttpResponse } from '../protocols';
+import { InvalidParamError } from '../errors';
+import { badRequest, created, serverError } from '../helpers';
+import { Controller } from '../protocols';
 
 export type RoleRequest = {
     roleName: RoleNameEnumModel;
@@ -14,6 +15,10 @@ export class CreateRoleController implements Controller {
     async handle(request: RoleRequest): Promise<NextResponse> {
         try {
             const { roleName } = request;
+            if (roleName !== 'master' && roleName !== 'player') {
+                return badRequest(new InvalidParamError(roleName));
+            }
+
             await this.createRoleUsecase.create(roleName);
 
             return created();
