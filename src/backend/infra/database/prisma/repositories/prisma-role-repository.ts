@@ -6,8 +6,10 @@ export class PrismaRoleRepository implements RoleRepository {
     constructor(private prismaService: PrismaService) {}
 
     async createRole(role: RoleModel): Promise<void> {
-        this.prismaService.role.create({
-            data: role,
+        await this.prismaService.role.create({
+            data: {
+                roleName: role.roleName,
+            },
         });
     }
 }

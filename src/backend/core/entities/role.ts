@@ -1,12 +1,6 @@
-import { randomUUID } from 'crypto';
-
-export class Role {
+export type Role = {
     roleName: RoleNameEnum;
-
-    constructor(roleName: RoleNameEnum) {
-        this.roleName = roleName;
-    }
-}
+};
 
 const RoleType = {
     PLAYER: 'player',

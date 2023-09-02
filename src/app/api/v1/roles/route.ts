@@ -9,7 +9,7 @@ export async function POST(request: Request) {
     const createRoleService = new CreateRoleService(prismaRoleRepository);
     const constroller = new CreateRoleController(createRoleService);
 
-    const role = await request.json();
+    const body = await request.json();
 
-    return await constroller.handle(role);
+    return await constroller.handle(body);
 }

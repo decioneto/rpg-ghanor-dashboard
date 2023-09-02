@@ -1,5 +1,5 @@
-import { Role } from '../entities';
+import { RoleNameEnum } from '../entities';
 
 export interface CreateRoleUseCase {
-    create: (role: Role) => Promise<void>;
+    create: (roleName: RoleNameEnum) => Promise<void>;
 }

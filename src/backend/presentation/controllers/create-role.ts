@@ -1,11 +1,11 @@
 import { CreateRoleUseCase } from '@/backend/core/use-cases';
-import { RoleModel } from '@/backend/data/models';
+import { RoleModel, RoleNameEnumModel } from '@/backend/data/models';
 import { NextResponse } from 'next/server';
 import { created, serverError } from '../helpers';
 import { Controller, HttpResponse } from '../protocols';
 
 export type RoleRequest = {
-    role: RoleModel;
+    roleName: RoleNameEnumModel;
 };
 
 export class CreateRoleController implements Controller {
@@ -13,8 +13,8 @@ export class CreateRoleController implements Controller {
 
     async handle(request: RoleRequest): Promise<NextResponse> {
         try {
-            const { role } = request;
-            await this.createRoleUsecase.create(role);
+            const { roleName } = request;
+            await this.createRoleUsecase.create(roleName);
 
             return created();
         } catch (error: any) {

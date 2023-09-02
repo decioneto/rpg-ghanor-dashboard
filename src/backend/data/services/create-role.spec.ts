@@ -23,7 +23,7 @@ describe('Create Role', () => {
     it('should be able to create a role', async () => {
         const { sut, roles } = makeRole();
         const roleMock = mockRole();
-        sut.create(roleMock);
+        sut.create(roleMock.roleName);
 
         expect(roles).toHaveLength(1);
     });

@@ -8,7 +8,7 @@ type SutData = {
 };
 
 const mockRequest: RoleRequest = {
-    role: mockRole(),
+    roleName: mockRole().roleName,
 };
 
 function makeSut(): SutData {
