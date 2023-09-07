@@ -24,6 +24,8 @@ describe('Create role controller', () => {
         const { sut } = makeSut();
         const httpResponse = await sut.handle(mockRequest);
 
+        console.log(httpResponse);
+
         expect(httpResponse).toEqual(created());
     });
 });

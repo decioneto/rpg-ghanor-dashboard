@@ -24,7 +24,7 @@ export const serverError = (err: Error) => {
 };
 
 export const ok = (data: any) => {
-    return NextResponse.json({ data: data }, { status: 201 });
+    return NextResponse.json({ data: data }, { status: 200 });
 };
 
 export const created = () => NextResponse.json({ data: '' }, { status: 201 });
