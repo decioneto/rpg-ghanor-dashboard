@@ -2,7 +2,6 @@ import { FindRoleByIdService } from '@/backend/data/services/find-role-by-id';
 import { PrismaService } from '@/backend/infra/database/prisma/prisma-service';
 import { PrismaRoleRepository } from '@/backend/infra/database/prisma/repositories/prisma-role-repository';
 import { FindRoleByIdController } from '@/backend/presentation/controllers/find-role-by-id';
-import { NextResponse } from 'next/server';
 
 type QueryParams = {
     params: {

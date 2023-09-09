@@ -1,15 +1,6 @@
-import { randomUUID } from 'crypto';
-
-export class User {
-    id?: string;
+export type User = {
     username: string;
     password: string;
     roleId: string;
-
-    constructor(username: string, password: string, roleId: string) {
-        this.id = randomUUID();
-        this.username = username;
-        this.password = password;
-        this.roleId = roleId;
-    }
-}
+    createdAt?: Date;
+};
