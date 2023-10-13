@@ -13,7 +13,6 @@ export class CreateUserController implements Controller {
     async handle(request: Request): Promise<NextResponse> {
         try {
             const { username, password, roleId } = request;
-            console.log(request);
             const result = await this.createUserUseCase.execute({
                 username,
                 password,

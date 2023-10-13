@@ -15,16 +15,11 @@ export class PrismaRoleRepository implements RoleRepository {
     }
 
     async findRoleById(roleId: string): Promise<RoleModel> {
-        const role = await this.prismaService.role.findUnique({
+        const role = await this.prismaService.role.findUniqueOrThrow({
             where: {
                 id: roleId,
             },
         });
-
-        if (!role)
-            throw new Error(
-                `Não foi encontrado nenhum resultado pelo parâmetro ${roleId}`
-            );
 
         return PrismaRoleMapper.toDomain(role);
     }

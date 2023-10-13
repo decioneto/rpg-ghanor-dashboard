@@ -1,3 +1,4 @@
+import { User } from '@/backend/core/entities';
 import { UserModel } from '@/backend/data/models/user';
 import { UserRepository } from '@/backend/data/repositories/user-repository';
 
@@ -12,5 +13,10 @@ export class InMemoryUserRepository implements UserRepository {
     async checkByUsername(username: string): Promise<boolean> {
         const exists = this.users.some((item) => item.username === username);
         return exists;
+    }
+
+    async findByUsername(username: string): Promise<User> {
+        const user = this.users.filter((item) => item.username === username);
+        return user[0];
     }
 }
