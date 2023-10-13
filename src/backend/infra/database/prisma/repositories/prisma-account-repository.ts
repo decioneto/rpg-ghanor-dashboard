@@ -1,5 +1,6 @@
 import { User } from '@/backend/core/entities';
 import { GetUserByUsernameRepository } from '@/backend/data/protocols/db/get-user-by-username';
+import { PrismaUserMapper } from '@/backend/infra/mappers/prisma-user-mapper';
 import { PrismaService } from '../prisma-service';
 
 export class PrismaAccountRepository implements GetUserByUsernameRepository {
@@ -12,6 +13,6 @@ export class PrismaAccountRepository implements GetUserByUsernameRepository {
             },
         });
 
-        return P;
+        return PrismaUserMapper.toDomain(user);
     }
 }

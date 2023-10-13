@@ -1,4 +1,4 @@
-import { User } from '@prisma/client';
+import { User } from "../entities";
 
 export type AuthParams = {
     username: string;

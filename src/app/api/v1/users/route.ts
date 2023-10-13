@@ -1,7 +1,7 @@
 import { CreateUserService } from '@/backend/data/services/create-user';
 import { BcryptAdapter } from '@/backend/infra/cryptography/bcrypt-adapter';
 import { PrismaService } from '@/backend/infra/database/prisma/prisma-service';
-import { PrismaUserRepository } from '@/backend/infra/database/prisma/repositories/prisma-user-repositoey';
+import { PrismaUserRepository } from '@/backend/infra/database/prisma/repositories/prisma-user-repository';
 import { CreateUserController } from '@/backend/presentation/controllers/create-user';
 
 export async function POST(request: Request) {
@@ -12,9 +12,9 @@ export async function POST(request: Request) {
         prismaUserRepository,
         bcryptAdapter
     );
-    const constroller = new CreateUserController(createUserService);
+    const controller = new CreateUserController(createUserService);
 
     const body = await request.json();
 
-    return await constroller.handle(body);
+    return await controller.handle(body);
 }

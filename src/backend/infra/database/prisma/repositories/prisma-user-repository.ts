@@ -1,11 +1,11 @@
-import { User } from '@/backend/core/entities';
+import { UserModel } from '@/backend/data/models/user';
 import { UserRepository } from '@/backend/data/repositories/user-repository';
 import { PrismaService } from '../prisma-service';
 
 export class PrismaUserRepository implements UserRepository {
     constructor(private prismaService: PrismaService) {}
 
-    async createUser(user: User): Promise<boolean> {
+    async createUser(user: UserModel): Promise<boolean> {
         const result = await this.prismaService.user.create({
             data: {
                 username: user.username,

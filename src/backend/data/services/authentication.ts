@@ -24,7 +24,7 @@ export class AuthenticationService implements AuthenticationUseCase {
             );
             if (isValid) {
                 const accessToken = await this.encrypterRepository.encrypt(
-                    account.id
+                    account.username
                 );
                 return {
                     accessToken,
