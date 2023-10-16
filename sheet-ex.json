@@ -1,0 +1,20 @@
+{
+    "character-sheet": [
+        {
+            "ch-name": "asd",
+            "pv-list": [-20, 10, 3],
+            "pm-list": [-20, 10, 3],
+            "race": "humano",
+            "class": "cavaleiro",
+            "origin": "escudeiro",
+            "attributes": ["for", "des", "con", "int", "sab", "car"],
+            "skills": ["skills alphabetic order"],
+            "attacks": ["name of attack"],
+            "equipments": ["equipment name"],
+            "powers": ["power name"],
+            "magics": ["magic name"],
+            "items": ["item name"],
+            "backpack": ["backpack item"]
+        }
+    ]
+}

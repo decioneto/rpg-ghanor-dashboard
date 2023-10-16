@@ -1,11 +1,11 @@
 import { CreateAttributeNameUseCase } from "@/backend/core/use-cases/create-attr-name";
 import { AttributeNameModel } from "../models/attr-name";
-import { AttrNameRepository } from "../repositories/attr-name-repository";
+import { CharacterSheetRepository } from "../repositories/character-sheet-repository";
 
 export class CreateAttrName implements CreateAttributeNameUseCase {
-    constructor(private attrNameRepository: AttrNameRepository) {}
+    constructor(private characterSheetRepository: CharacterSheetRepository) {}
 
-    async execute(attrName: AttributeNameModel): Promise<void> {
-        await this.attrNameRepository.create(attrName)
+    async execute(attrName: AttributeNameModel): Promise<boolean> {
+        return await this.characterSheetRepository.createAttrName(attrName);
     };
 }
