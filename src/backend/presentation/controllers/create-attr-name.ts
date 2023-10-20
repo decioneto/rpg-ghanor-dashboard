@@ -13,7 +13,6 @@ export class CreateAttrNameController implements Controller {
     async handle(request: AttrNameRequest): Promise<NextResponse> {
         try {
             const { name } = request;
-
             await this.createAttributeNameUseCase.execute({name});
 
             return created();
