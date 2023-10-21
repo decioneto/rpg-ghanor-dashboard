@@ -21,7 +21,7 @@ export class LoginController implements Controller {
                 request.username
             );
             if (!exists) {
-                return badRequest(new Error('User does not exists'));
+                return badRequest(new Error('User or password does not match'));
             }
 
             const authenticateModel = await this.authentication.execute({

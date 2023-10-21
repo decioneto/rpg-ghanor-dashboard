@@ -22,13 +22,17 @@ export class AuthenticationService implements AuthenticationUseCase {
                 password,
                 account.password
             );
+            console.log(account);
             if (isValid) {
                 const accessToken = await this.encrypterRepository.encrypt(
                     account.username
                 );
                 return {
                     accessToken,
-                    user: account,
+                    user: {
+                        ...account,
+                        password: '',
+                    },
                 };
             }
         }

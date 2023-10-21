@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { ServerError, UnauthorizedError } from '../errors';
 
 export const badRequest = (error: Error) => {
-    return NextResponse.json({ data: error }, { status: 400 });
+    return NextResponse.json({ data: error.message }, { status: 400 });
 };
 
 export const forbidden = (error: Error) => {

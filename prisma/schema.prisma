@@ -1,73 +1,70 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider          = "mysql"
-    url               = env("DATABASE_URL")
-    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
-    relationMode      = "prisma"
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  relationMode      = "prisma"
 }
 
 model User {
-    id              String            @id @default(uuid())
-    createdAt       DateTime          @default(now())
-    username        String            @unique
-    password        String
-    roleId          String
-    roles           Role              @relation(fields: [roleId], references: [id])
-    characterSheets CharacterSheets[]
+  id              String            @id @default(uuid())
+  createdAt       DateTime          @default(now())
+  username        String            @unique
+  password        String
+  roleId          String
+  roles           Role              @relation(fields: [roleId], references: [id])
+  characterSheets CharacterSheets[]
 
-    @@index([roleId])
+  @@index([roleId])
 }
 
 model Role {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    roleName  String
-    users     User[]
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  roleName  String
+  users     User[]
 }
 
 model CharacterSheets {
-    id           String                @id @default(uuid())
-    createdAt    DateTime              @default(now())
-    userId       String
-    user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
-    chName       String
-    chAttributes CharacterAttributes[]
+  id           String                @id @default(uuid())
+  createdAt    DateTime              @default(now())
+  userId       String
+  chName       String
+  user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chAttributes CharacterAttributes[]
 
-    @@index([userId])
+  @@index([userId])
 }
 
 model CharacterAttributes {
-    id         String          @id @default(uuid())
-    createdAt  DateTime        @default(now())
-    chSheetId  String
-    chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
-    attrNameId String
-    attrName   AttributesName  @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
+  id         String          @id @default(uuid())
+  createdAt  DateTime        @default(now())
+  chSheetId  String
+  attrNameId String
+  chSheets   CharacterSheets @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
+  attrName   AttributesName  @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
 
-    @@index([chSheetId])
-    @@index([attrNameId])
+  @@index([chSheetId])
+  @@index([attrNameId])
 }
 
 model AttributesName {
-    id               String                @id @default(uuid())
-    createdAt        DateTime              @default(now())
-    chAttributes     CharacterAttributes[]
-    AttributesValues AttributesValues[]
-    name             String
+  id               String                @id @default(uuid())
+  createdAt        DateTime              @default(now())
+  name             String
+  chAttributes     CharacterAttributes[]
+  AttributesValues AttributesValues[]
 }
 
 model AttributesValues {
-    id         String         @id @default(uuid())
-    createdAt  DateTime       @default(now())
-    attrNameId String
-    attrName   AttributesName @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
-    value      String
+  id         String         @id @default(uuid())
+  createdAt  DateTime       @default(now())
+  attrNameId String
+  value      String
+  attrName   AttributesName @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
 
-    @@index([attrNameId])
+  @@index([attrNameId])
 }
