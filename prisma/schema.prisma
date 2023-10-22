@@ -33,6 +33,7 @@ model CharacterSheets {
   createdAt    DateTime              @default(now())
   userId       String
   chName       String
+  chLevel      Int
   user         User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   chAttributes CharacterAttributes[]
 
@@ -53,18 +54,18 @@ model CharacterAttributes {
 
 model AttributesName {
   id               String                @id @default(uuid())
-  createdAt        DateTime              @default(now())
   name             String
   chAttributes     CharacterAttributes[]
   AttributesValues AttributesValues[]
+  createdAt        DateTime              @default(now())
 }
 
 model AttributesValues {
   id         String         @id @default(uuid())
-  createdAt  DateTime       @default(now())
   attrNameId String
   value      String
   attrName   AttributesName @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
+  createdAt  DateTime       @default(now())
 
   @@index([attrNameId])
 }
