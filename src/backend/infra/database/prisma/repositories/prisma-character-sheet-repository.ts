@@ -22,6 +22,11 @@ export class PrismaCharacterSheetRepository
         const result = await this.prismaService.attributesValues.create({
             data: {
                 value: attrValue.value,
+                chSheet: {
+                    connect: {
+                        id: attrValue.chSheetId,
+                    },
+                },
                 attrName: {
                     connect: {
                         id: attrValue.attrNameId,

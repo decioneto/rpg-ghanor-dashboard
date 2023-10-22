@@ -1,7 +1,7 @@
-import { CreateAttrNameService } from '@/backend/data/services/create-attr-name';
+import { CreateAttrValueService } from '@/backend/data/services/create-attr-value';
 import { PrismaService } from '@/backend/infra/database/prisma/prisma-service';
 import { PrismaCharacterSheetRepository } from '@/backend/infra/database/prisma/repositories/prisma-character-sheet-repository';
-import { CreateAttrNameController } from '@/backend/presentation/controllers/create-attr-name';
+import { CreateAttrValueController } from '@/backend/presentation/controllers/create-attr-value';
 import { unauthorized } from '@/backend/presentation/helpers';
 
 export async function POST(request: Request) {
@@ -9,10 +9,10 @@ export async function POST(request: Request) {
     const prismaCharacterSheetRepository = new PrismaCharacterSheetRepository(
         prismaService
     );
-    const createAttrNameService = new CreateAttrNameService(
+    const createAttrValueService = new CreateAttrValueService(
         prismaCharacterSheetRepository
     );
-    const controller = new CreateAttrNameController(createAttrNameService);
+    const controller = new CreateAttrValueController(createAttrValueService);
     const token = request.headers.get('authorization');
     if (!token) {
         return unauthorized();
