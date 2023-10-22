@@ -5,6 +5,7 @@ import { Controller } from '../protocols';
 
 export type AttrNameRequest = {
     name: string;
+    chAttrId: string;
 };
 
 export class CreateAttrNameController implements Controller {
@@ -14,8 +15,8 @@ export class CreateAttrNameController implements Controller {
 
     async handle(request: AttrNameRequest): Promise<NextResponse> {
         try {
-            const { name } = request;
-            await this.createAttributeNameUseCase.execute({ name });
+            const { name, chAttrId } = request;
+            await this.createAttributeNameUseCase.execute({ name, chAttrId });
 
             return created();
         } catch (error: any) {
