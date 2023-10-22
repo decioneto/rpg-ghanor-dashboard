@@ -2,6 +2,6 @@ export type CharacterSheet = {
     id?: string;
     userId: string;
     chName: string;
-    chLevel: string;
+    chLevel: number;
     createdAt?: Date;
 };
