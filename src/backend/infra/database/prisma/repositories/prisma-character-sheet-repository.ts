@@ -1,5 +1,4 @@
 import { AttributeName } from '@/backend/core/entities/attr-name';
-import { CharacterAttribute } from '@/backend/core/entities/ch-attribute';
 import { CharacterSheet } from '@/backend/core/entities/ch-sheet';
 import { AttributeValueModel } from '@/backend/data/models/attr-value';
 import { CharacterSheetRepository } from '@/backend/data/repositories/character-sheet-repository';

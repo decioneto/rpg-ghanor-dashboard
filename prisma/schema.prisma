@@ -46,18 +46,18 @@ model CharacterAttribute {
   createdAt      DateTime         @default(now())
   chSheetId      String
   chSheets       CharacterSheet   @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
-  AttributeNames AttributesName[]
+  AttributesName AttributesName[]
 
   @@index([chSheetId])
 }
 
 model AttributesName {
-  id               String             @id @default(uuid())
-  name             String
-  chAttrId         String
-  chAttributes     CharacterAttribute @relation(fields: [chAttrId], references: [id], onDelete: Cascade)
-  AttributesValues AttributesValue[]
-  createdAt        DateTime           @default(now())
+  id                 String             @id @default(uuid())
+  name               String
+  chAttrId           String
+  AttributesValues   AttributesValue[]
+  createdAt          DateTime           @default(now())
+  CharacterAttribute CharacterAttribute @relation(fields: [chAttrId], references: [id])
 
   @@index([chAttrId])
 }
