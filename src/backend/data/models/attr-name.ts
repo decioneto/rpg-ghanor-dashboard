@@ -1,3 +1,3 @@
-import { AttributeName } from "@/backend/core/entities/attr-name";
+import { AttributeName } from '@/backend/core/entities/attr-name';
 
-export type AttributeNameModel = AttributeName
+export type AttributeNameModel = AttributeName;

@@ -36,38 +36,46 @@ model CharacterSheet {
   chLevel          Int
   user             User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   chAttributes     CharacterAttribute[]
-  AttributesValues AttributesValue[]
+  AttributesValues AttributeValue[]
 
   @@index([userId])
 }
 
 model CharacterAttribute {
-  id             String           @id @default(uuid())
-  createdAt      DateTime         @default(now())
-  chSheetId      String
-  chSheets       CharacterSheet   @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
-  AttributesName AttributesName[]
+  id                      String                    @id @default(uuid())
+  createdAt               DateTime                  @default(now())
+  chSheetId               String
+  chSheets                CharacterSheet            @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
+  CharacterAttributeNames CharacterAttributeNames[]
 
   @@index([chSheetId])
 }
 
-model AttributesName {
-  id                 String             @id @default(uuid())
-  name               String
-  chAttrId           String
-  AttributesValues   AttributesValue[]
-  createdAt          DateTime           @default(now())
-  CharacterAttribute CharacterAttribute @relation(fields: [chAttrId], references: [id])
+model CharacterAttributeNames {
+  id         String             @id @default(uuid())
+  chAttrId   String
+  attrNameId String
+  chAttr     CharacterAttribute @relation(fields: [chAttrId], references: [id], onDelete: Cascade)
+  attrName   AttributeName      @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
 
   @@index([chAttrId])
+  @@index([attrNameId])
 }
 
-model AttributesValue {
+model AttributeName {
+  id                      String                    @id @default(uuid())
+  name                    String
+  AttributesValues        AttributeValue[]
+  createdAt               DateTime                  @default(now())
+  CharacterAttributeNames CharacterAttributeNames[]
+}
+
+model AttributeValue {
   id         String         @id @default(uuid())
   chSheetId  String
   attrNameId String
   value      String
-  attrName   AttributesName @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
+  attrName   AttributeName  @relation(fields: [attrNameId], references: [id], onDelete: Cascade)
   chSheet    CharacterSheet @relation(fields: [chSheetId], references: [id], onDelete: Cascade)
   createdAt  DateTime       @default(now())
 

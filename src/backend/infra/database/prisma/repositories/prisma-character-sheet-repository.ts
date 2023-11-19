@@ -19,24 +19,38 @@ export class PrismaCharacterSheetRepository
                         id: chSheet.userId,
                     },
                 },
-                chAttributes: {
-                    create: {},
-                },
             },
         });
 
         return result.id !== null;
     }
 
-    async createAttrName(attrName: AttributeName): Promise<boolean> {
-        const result = await this.prismaService.attributesName.create({
-            data: {
-                name: attrName.name,
-                chAttributes: {
-                    connect: {
-                        id: attrName.chAttrId,
+    async getCharacterSheetsByUser(userId: string) {
+        const characterSheets =
+            await this.prismaService.characterSheet.findMany({
+                where: {
+                    userId,
+                    chAttributes: {
+                        some: {
+                            CharacterAttributeNames: {
+                                some: {
+                                    chAttr: {
+                                        chSheets: {
+                                            userId,
+                                        },
+                                    },
+                                },
+                            },
+                        },
                     },
                 },
+            });
+    }
+
+    async createAttrName(attrName: AttributeName): Promise<boolean> {
+        const result = await this.prismaService.attributeName.create({
+            data: {
+                name: attrName.name,
             },
         });
 
@@ -44,7 +58,7 @@ export class PrismaCharacterSheetRepository
     }
 
     async createAttrValue(attrValue: AttributeValueModel): Promise<boolean> {
-        const result = await this.prismaService.attributesValue.create({
+        const result = await this.prismaService.attributeValue.create({
             data: {
                 value: attrValue.value,
                 chSheet: {
