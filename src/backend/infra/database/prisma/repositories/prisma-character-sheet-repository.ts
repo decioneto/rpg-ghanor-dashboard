@@ -25,26 +25,18 @@ export class PrismaCharacterSheetRepository
         return result.id !== null;
     }
 
-    async getCharacterSheetsByUser(userId: string) {
+    async findChSheetsByUserId(userId: string): Promise<CharacterSheet[]> {
         const characterSheets =
             await this.prismaService.characterSheet.findMany({
                 where: {
                     userId,
-                    chAttributes: {
-                        some: {
-                            CharacterAttributeNames: {
-                                some: {
-                                    chAttr: {
-                                        chSheets: {
-                                            userId,
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
+                },
+                include: {
+                    characterAttributeNames: true,
                 },
             });
+
+        return characterSheets;
     }
 
     async createAttrName(attrName: AttributeName): Promise<boolean> {
