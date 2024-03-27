@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 import { Input } from '@/components/Input';
 import { SelectInput, SelectItemsProps } from '@/components/Select';
 import { ViewPassword } from '@/components/ViewPassword';
-import { RoleNameEnum } from '@/enums/RoleEnum';
+import { RoleNameEnum } from '@/enums/RoleNameEnum';
 import { FormBodyProps } from './types';
 
 const SELECT_ITEMS: SelectItemsProps[] = [
